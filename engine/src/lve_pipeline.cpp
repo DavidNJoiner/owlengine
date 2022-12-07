@@ -19,6 +19,7 @@ namespace lve {
     }
     LvePipeline::~LvePipeline() {
         vkDestroyShaderModule(lveDevice.device(), vertShaderModule, nullptr);
+        vkDestroyShaderModule(lveDevice.device(), fragShaderModule, nullptr);
         vkDestroyPipeline(lveDevice.device(), graphicsPipeline, nullptr);
     }
     std::vector<char> lve::LvePipeline::readFile(const std::string& filepath)
