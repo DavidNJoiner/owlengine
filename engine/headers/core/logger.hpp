@@ -1,6 +1,7 @@
 #pragma once
 #include "define.hpp"
 
+
 #define LOG_WARN_ENABLED 1
 #define LOG_INFO_ENABLED 1
 #define LOG_DEBUG_ENABLED 1

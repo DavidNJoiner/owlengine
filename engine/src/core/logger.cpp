@@ -1,5 +1,5 @@
-#include "core/logger.hpp"
-#include "core/asserts.hpp"
+#include <core/logger.hpp>
+#include <core/asserts.hpp>
 
 //TODO temporary
 #include <stdio.h>
@@ -40,7 +40,7 @@ void log_output(log_level level, const char* message ...)
 	printf_s("%s", out_message2);
 }
 
-void report_assertion_failure(const char* expression, const char* message, const char* file, int line)
+void report_assertion_failure(const char* expression, const char* message, const char* file, uint32_t line)
 {
 	log_output(LOG_LEVEL_FATAL, "Assertion Failure: %s, message: '%s', in file: %s, line: %d\n", expression, message, file, line);
 	//log_output(LOG_LEVEL_FATAL, "Assertion failure: ", expression, "message: ", message, "in file: ", file, "line: ", line);

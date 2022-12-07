@@ -1,5 +1,4 @@
 #pragma once
-
 #include "define.hpp"
 
 //Disable assertions by commenting out the below line
@@ -13,7 +12,7 @@
 #define debugBreak() __builtin_trap()
 #endif //  LVE_ASSERTIONS_ENABLED
 
-LVE_API void report_assertion_failure(const char* expression, const char* message, const char* file, int line);
+LVE_API void report_assertion_failure(const char* expression, const char* message, const char* file, uint32_t line);
 
 #define LVE_ASSERT(expr)                                                \
     {                                                                \
