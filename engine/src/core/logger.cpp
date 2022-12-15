@@ -22,6 +22,15 @@ void shutdown_logging()
 
 void log_output(log_level level, const char* message ...)
 {
+	//TODO: Implement color for each level
+	
+	//Red : \033[31m
+	//Blue: \033[34m
+	//Green : \033[32m
+	//Yellow : \033[33m
+	//Orange : \033[38; 5; 214m
+	//Purple : \033[35m
+
 	const char* level_strings[6] = { "[FATAL]: ", "[ERROR]: " , "[WARN]: " , "[INFO]: " , "[DEBUG]: " , "[TRACE]: " };
 	uint8_t is_error = level < 2;
 
@@ -34,6 +43,15 @@ void log_output(log_level level, const char* message ...)
 	va_end(arg_ptr);
 
 	char out_message2[32000];
+
+	va_start(arg_ptr, message);
+
+	printf("\033[38;5;214m%s:\033[0m ", level_strings[level]);
+	vprintf(message, arg_ptr);
+	printf("\n");
+
+	va_end(arg_ptr);
+
 	sprintf_s(out_message2, "%s%s\n", level_strings[level], out_message);
 
 	// TODO: platform-specific output.

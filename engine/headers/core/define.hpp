@@ -24,6 +24,7 @@ STATIC_ASSERT(sizeof(double) == 8, "Expected double to be 8 bytes / 64 bits.");
 
 #define TRUE 1
 #define FALSE 0
+#define LVE_EXPORT TRUE
 
 // Platform detection (only windows is supported)
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) 
