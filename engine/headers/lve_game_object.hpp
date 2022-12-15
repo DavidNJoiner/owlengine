@@ -1,5 +1,4 @@
 #pragma once
-
 #include "lve_model.hpp"
 
 //libs
@@ -24,13 +23,16 @@ namespace lve {
 
 	class LveGameObject {
 	public:
+		//unique object id
 		using id_t = unsigned int;
 
-		static LveGameObject createGameObject() {
+		static LveGameObject createGameObject() 
+		{
 			static id_t currentId = 0;
 			return LveGameObject{ currentId++ };
 		}
 
+		// delete copy constructor
 		LveGameObject(const LveGameObject&) = delete;
 		LveGameObject& operator=(const LveGameObject&) = delete;
 		LveGameObject(LveGameObject&&) = default;
@@ -38,13 +40,13 @@ namespace lve {
 
 		id_t getId() { return id; };
 
+		//object property
 		std::shared_ptr<LveModel> model{};
 		glm::vec3 color{};
 		TransformComponent transform{};
 
 	private:
 		LveGameObject(id_t objId) : id{ objId } {}
-
 		id_t id;
 	};
 }//namespace lve

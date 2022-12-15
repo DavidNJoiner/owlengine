@@ -4,6 +4,7 @@
 
 namespace lve {
 
+    // Wrap a vkBuffer and a vkBufferMemory into a single object
     class LveBuffer {
     public:
         LveBuffer(

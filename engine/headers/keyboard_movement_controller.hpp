@@ -1,7 +1,8 @@
 #pragma once
 
+#include <renderer/lve_window.hpp>
 #include "lve_game_object.hpp"
-#include "lve_window.hpp"
+
 
 namespace lve {
 
@@ -15,6 +16,8 @@ namespace lve {
             int moveBackward = GLFW_KEY_S;
             int moveUp = GLFW_KEY_E;
             int moveDown = GLFW_KEY_Q;
+
+            //TODO : bind camera rotation to mouse
             int lookLeft = GLFW_KEY_LEFT;
             int lookRight = GLFW_KEY_RIGHT;
             int lookUp = GLFW_KEY_UP;

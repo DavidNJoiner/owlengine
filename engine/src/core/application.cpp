@@ -1,6 +1,6 @@
 #include <core/application.hpp>
 #include <core/logger.hpp>
-#include <lve_buffer.hpp>
+#include <renderer/lve_buffer.hpp>
 
 //libs
 #define GLM_FORCE_RADIANS

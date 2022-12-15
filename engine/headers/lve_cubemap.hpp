@@ -1,6 +1,6 @@
 #pragma once
-#include <lve_window.hpp>
-#include <lve_device.hpp>
+#include <renderer/lve_window.hpp>
+#include <renderer/lve_device.hpp>
 
 namespace lve {
 

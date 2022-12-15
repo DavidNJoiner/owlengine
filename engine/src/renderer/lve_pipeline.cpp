@@ -1,4 +1,4 @@
-#include "lve_pipeline.hpp"
+#include <renderer/lve_pipeline.hpp>
 #include "lve_model.hpp"
 
 // std

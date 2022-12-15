@@ -2,6 +2,7 @@
 // std
 #include <cassert>
 #include <limits>
+
 namespace lve {
     void LveCamera::setOrthographicProjection(
         float left, float right, float top, float bottom, float near, float far) {

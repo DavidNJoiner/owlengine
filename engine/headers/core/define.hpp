@@ -25,7 +25,7 @@ STATIC_ASSERT(sizeof(double) == 8, "Expected double to be 8 bytes / 64 bits.");
 #define TRUE 1
 #define FALSE 0
 
-// Platform detection
+// Platform detection (only windows is supported)
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) 
 #define LVE_PLATFORM_WINDOWS = 1;
 #ifndef _WIN64
