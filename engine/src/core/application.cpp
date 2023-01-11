@@ -1,5 +1,7 @@
+//core
 #include <core/application.hpp>
-#include <core/logger.hpp>
+
+//renderer
 #include <renderer/lve_buffer.hpp>
 
 //libs
@@ -14,14 +16,15 @@
 #include <cassert>
 #include <stdexcept>
 #include <iostream>
-#include <vector>
 
 namespace lve {
 
     // object to pass read only data to the pipeline shaders 
     struct GlobalUbo {
-        alignas(16) glm::mat4 projectionView{ 1.f };
-        alignas(16) glm::vec3 lightDirection = glm::normalize(glm::vec3{ 1.f, -3.f, -1.f });
+        glm::mat4 projectionView{ 1.f };
+        glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .02f }; // w is intensity
+        glm::vec4 lightPosition{ -1.f }; // vec4 for alignment
+        glm::vec4 lightColor{ 1.f }; // w is light intensity
     };
 
 	Application::Application(application_config &app_config_info) 
@@ -121,15 +124,6 @@ namespace lve {
 
 	void Application::loadGameObjects()
 	{
-        /*std::shared_ptr<LveModel> lveModel1 = LveModel::createModelFromFile(lveDevice, "models/scifi_girl/scifi_girl.obj");
-        
-        auto scifi_girl = LveGameObject::createGameObject();
-        scifi_girl.model = lveModel1;
-        scifi_girl.transform.translation = { .5f, .5f, 2.5f };
-        scifi_girl.transform.rotation = { .0f, .0f, 3.f };
-        scifi_girl.transform.scale = glm::vec3(0.1f);
-        gameObjects.push_back(std::move(scifi_girl));*/
-
         std::shared_ptr<LveModel> lveModel2 = LveModel::createModelFromFile(lveDevice, "models/flat_vase.obj");
 
         auto flatVase = LveGameObject::createGameObject();
