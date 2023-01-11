@@ -22,6 +22,14 @@ namespace lve {
         vkDestroyShaderModule(lveDevice.device(), fragShaderModule, nullptr);
         vkDestroyPipeline(lveDevice.device(), graphicsPipeline, nullptr);
     }
+
+    /**
+     * Reads the contents of a file and return it as an std::vector<char>
+     *
+     * @param filepath The path to the file to be read
+     *
+     * @return buffer A char vector containing the data of the file in binary
+     */
     std::vector<char> lve::LvePipeline::readFile(const std::string& filepath)
     {
         std::ifstream file(filepath, std::ios::ate | std::ios::binary);
@@ -40,10 +48,15 @@ namespace lve {
         return buffer;
     }
 
-    void LvePipeline::createGraphicsPipelines(
-        const std::string& vertFilepath,
-        const std::string& fragFilepath,
-        const PipelineConfigInfo& configInfo)
+    /**
+     * Create a Vulkan Graphics pipeline object
+     *
+     * @param vertFilepath The vertex shader file path (.spv file)
+     * @param fragFilepath The fragment shader file path (.spv file)
+     * @param configInfo A PipelineConfigInfo object
+     * 
+     */
+    void LvePipeline::createGraphicsPipelines( const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo)
     {
         assert(
             configInfo.pipelineLayout != VK_NULL_HANDLE &&
@@ -119,6 +132,13 @@ namespace lve {
 
     }
 
+    /**
+     * Create a shader module, a container for compiled shader code.
+     *
+     * @param code A vector of characters containing the compiled shader code
+     * @param shaderModule A pointer to a VkShaderModule that will be used to store the created shader module.
+     *
+     */
     void LvePipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule) {
         VkShaderModuleCreateInfo createInfo{};
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
@@ -130,9 +150,21 @@ namespace lve {
         }
     }
 
+
+    /**
+     * Binds a pipeline to a command buffer.
+     *
+     * @param commandBuffer A VkCommandBuffer object, which represents a command buffer that has been allocated by the application.
+     *
+     */
     void LvePipeline::bind(VkCommandBuffer commandBuffer)
     {
         vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+        /*
+        * After the pipeline is bound to the command buffer,
+        * all subsequent draw commands in the command buffer will use the pipeline to render geometry.
+        * The pipeline remains bound to the command buffer until it is explicitly unbound or until a different pipeline is bound.
+        */
     }
 
     void LvePipeline::defaultPipelineConfigInfo(PipelineConfigInfo& configInfo) 

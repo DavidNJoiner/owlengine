@@ -1,6 +1,10 @@
+//core
+#include <core/logger.hpp>
+
+//renderer
 #include <renderer/lve_device.hpp>
 
-// std headers
+//std
 #include <cstring>
 #include <iostream>
 #include <set>
@@ -14,7 +18,8 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     VkDebugUtilsMessageTypeFlagsEXT messageType,
     const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
     void *pUserData) {
-  std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+    LVE_INFO("validation layer: ", pCallbackData->pMessage);
+  //std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
 
   return VK_FALSE;
 }
@@ -70,14 +75,15 @@ LveDevice::~LveDevice() {
 
 void LveDevice::createInstance() {
   if (enableValidationLayers && !checkValidationLayerSupport()) {
-    throw std::runtime_error("validation layers requested, but not available!");
+      LVE_FATAL("validation layers requested, but not available!");
+    //throw std::runtime_error("validation layers requested, but not available!");
   }
 
   VkApplicationInfo appInfo = {};
   appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-  appInfo.pApplicationName = "LittleVulkanEngine App";
+  appInfo.pApplicationName = "OwlEngine Game Editor";
   appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-  appInfo.pEngineName = "No Engine";
+  appInfo.pEngineName = "OwlEngine";
   appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
   appInfo.apiVersion = VK_API_VERSION_1_0;
 
@@ -102,7 +108,8 @@ void LveDevice::createInstance() {
   }
 
   if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
-    throw std::runtime_error("failed to create instance!");
+      LVE_FATAL("failed to create instance!");
+    //throw std::runtime_error("failed to create instance!");
   }
 
   hasGflwRequiredInstanceExtensions();
@@ -112,9 +119,11 @@ void LveDevice::pickPhysicalDevice() {
   uint32_t deviceCount = 0;
   vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
   if (deviceCount == 0) {
-    throw std::runtime_error("failed to find GPUs with Vulkan support!");
+      LVE_FATAL("failed to find GPUs with Vulkan support!");
+    //throw std::runtime_error("failed to find GPUs with Vulkan support!");
   }
-  std::cout << "Device count: " << deviceCount << std::endl;
+  LVE_INFO("Device count: %d" , deviceCount);
+  //std::cout << "Device count: " << deviceCount << std::endl;
   std::vector<VkPhysicalDevice> devices(deviceCount);
   vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
@@ -130,7 +139,7 @@ void LveDevice::pickPhysicalDevice() {
   }
 
   vkGetPhysicalDeviceProperties(physicalDevice, &properties);
-  std::cout << "physical device: " << properties.deviceName << std::endl;
+  LVE_INFO("physical device: ", properties.deviceName);
 }
 
 void LveDevice::createLogicalDevice() {
@@ -172,7 +181,7 @@ void LveDevice::createLogicalDevice() {
   }
 
   if (vkCreateDevice(physicalDevice, &createInfo, nullptr, &device_) != VK_SUCCESS) {
-    throw std::runtime_error("failed to create logical device!");
+      LVE_FATAL("failed to create logical device!");
   }
 
   vkGetDeviceQueue(device_, indices.graphicsFamily, 0, &graphicsQueue_);
@@ -189,7 +198,7 @@ void LveDevice::createCommandPool() {
       VK_COMMAND_POOL_CREATE_TRANSIENT_BIT | VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 
   if (vkCreateCommandPool(device_, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
-    throw std::runtime_error("failed to create command pool!");
+      LVE_FATAL("failed to create command pool!");
   }
 }
 
@@ -231,7 +240,7 @@ void LveDevice::setupDebugMessenger() {
   VkDebugUtilsMessengerCreateInfoEXT createInfo;
   populateDebugMessengerCreateInfo(createInfo);
   if (CreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
-    throw std::runtime_error("failed to set up debug messenger!");
+      LVE_FATAL("failed to set up debug messenger!");
   }
 }
 
@@ -280,19 +289,19 @@ void LveDevice::hasGflwRequiredInstanceExtensions() {
   std::vector<VkExtensionProperties> extensions(extensionCount);
   vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
 
-  std::cout << "available extensions:" << std::endl;
+  LVE_INFO ("available extensions:");
   std::unordered_set<std::string> available;
   for (const auto &extension : extensions) {
     std::cout << "\t" << extension.extensionName << std::endl;
     available.insert(extension.extensionName);
   }
 
-  std::cout << "required extensions:" << std::endl;
+  LVE_INFO("required extensions:");
   auto requiredExtensions = getRequiredExtensions();
   for (const auto &required : requiredExtensions) {
     std::cout << "\t" << required << std::endl;
     if (available.find(required) == available.end()) {
-      throw std::runtime_error("Missing required glfw extension");
+      LVE_FATAL("Missing required glfw extension");
     }
   }
 }
@@ -387,7 +396,7 @@ VkFormat LveDevice::findSupportedFormat(
       return format;
     }
   }
-  throw std::runtime_error("failed to find supported format!");
+  LVE_FATAL("failed to find supported format!");
 }
 
 uint32_t LveDevice::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
@@ -400,7 +409,7 @@ uint32_t LveDevice::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags pr
     }
   }
 
-  throw std::runtime_error("failed to find suitable memory type!");
+  LVE_FATAL("failed to find suitable memory type!");
 }
 
 void LveDevice::createBuffer(
@@ -417,7 +426,7 @@ void LveDevice::createBuffer(
   bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
   if (vkCreateBuffer(device_, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
-    throw std::runtime_error("failed to create vertex buffer!");
+    LVE_FATAL("failed to create vertex buffer!");
   }
 
   VkMemoryRequirements memRequirements;
@@ -429,7 +438,7 @@ void LveDevice::createBuffer(
   allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
 
   if (vkAllocateMemory(device_, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
-    throw std::runtime_error("failed to allocate vertex buffer memory!");
+    LVE_FATAL("failed to allocate vertex buffer memory!");
   }
 
   vkBindBufferMemory(device_, buffer, bufferMemory, 0);
@@ -512,7 +521,7 @@ void LveDevice::createImageWithInfo(
     VkImage &image,
     VkDeviceMemory &imageMemory) {
   if (vkCreateImage(device_, &imageInfo, nullptr, &image) != VK_SUCCESS) {
-    throw std::runtime_error("failed to create image!");
+    LVE_FATAL("failed to create image!");
   }
 
   VkMemoryRequirements memRequirements;
@@ -524,11 +533,11 @@ void LveDevice::createImageWithInfo(
   allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
 
   if (vkAllocateMemory(device_, &allocInfo, nullptr, &imageMemory) != VK_SUCCESS) {
-    throw std::runtime_error("failed to allocate image memory!");
+      LVE_FATAL("failed to allocate image memory!");
   }
 
   if (vkBindImageMemory(device_, image, imageMemory, 0) != VK_SUCCESS) {
-    throw std::runtime_error("failed to bind image memory!");
+      LVE_FATAL("failed to bind image memory!");
   }
 }
 
