@@ -1,11 +1,15 @@
 #pragma once
+//core
 #include <core/logger.hpp>
+#include <core/define.hpp>
 
+//renderer
 #include <renderer/lve_window.hpp>
 #include <renderer/lve_renderer.hpp>
 #include <renderer/lve_device.hpp>
 #include <renderer/simple_render_system.hpp>
 
+//others
 #include "lve_game_object.hpp"
 #include "keyboard_movement_controller.hpp"
 #include "lve_camera.hpp"
