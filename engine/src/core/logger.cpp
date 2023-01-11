@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
+#include <windows.h>
+#include <iostream>
 
 // C libs
 #include <stdarg.h>
@@ -23,39 +25,50 @@ void shutdown_logging()
 void log_output(log_level level, const char* message ...)
 {
 	//TODO: Implement color for each level
-	
-	//Red : \033[31m
-	//Blue: \033[34m
-	//Green : \033[32m
-	//Yellow : \033[33m
-	//Orange : \033[38; 5; 214m
-	//Purple : \033[35m
 
 	const char* level_strings[6] = { "[FATAL]: ", "[ERROR]: " , "[WARN]: " , "[INFO]: " , "[DEBUG]: " , "[TRACE]: " };
+	int msg_color = 15;
 	uint8_t is_error = level < 2;
+	
 
-	char out_message[32000];
+	switch (level) {
+		case 1:
+			msg_color = 196;
+			break;
+		case 2:
+			msg_color = 208;
+			break;
+		case 3:
+			msg_color = 226;
+			break;
+		case 4:
+			msg_color = 46;
+			break;
+		case 5:
+			msg_color = 21;
+			break;
+		case 6:
+			msg_color = 129;
+			break;
+	}
+	
+	const uint32_t msg_length = 32000;
+	char out_message[msg_length];
 	memset(out_message, 0, sizeof(out_message));
 
 	va_list arg_ptr = nullptr;
-	va_start(arg_ptr, message);
-	vsnprintf(out_message, 32000, message, arg_ptr);
-	va_end(arg_ptr);
-
-	char out_message2[32000];
 
 	va_start(arg_ptr, message);
 
-	printf("\033[38;5;214m%s:\033[0m ", level_strings[level]);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), msg_color);
+
+	printf(level_strings[level]);
 	vprintf(message, arg_ptr);
 	printf("\n");
 
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+
 	va_end(arg_ptr);
-
-	sprintf_s(out_message2, "%s%s\n", level_strings[level], out_message);
-
-	// TODO: platform-specific output.
-	printf_s("%s", out_message2);
 }
 
 void report_assertion_failure(const char* expression, const char* message, const char* file, uint32_t line)
