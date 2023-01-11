@@ -1,4 +1,4 @@
-#include <first_app.hpp>
+#include <core/application.hpp>
 #include <core/logger.hpp>
 #include <core/asserts.hpp>
 
@@ -9,19 +9,11 @@
 
 int main()
 {
-	LVE_FATAL("A test message: %f", 3.14f);
-	LVE_ERROR("A test message: %f", 3.14f);
-	LVE_WARN("A test message: %f", 3.14f);
-	LVE_INFO("A test message: %f", 3.14f);
-	LVE_DEBUG("A test message: %f", 3.14f);
-	LVE_TRACE("A test message: %f", 3.14f);
-
-	LVE_ASSERT(1 == 0);
-
-	lve::FirstApp app{};
+	lve::application_config config{ 800,800 };
+	lve::Application owlEngineEditor{config};
 
 	try {
-		app.run();
+		owlEngineEditor.run();
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
