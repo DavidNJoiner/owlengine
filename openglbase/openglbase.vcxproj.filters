@@ -216,6 +216,8 @@
     <None Include="vendor\libs\glfw3.pdb" />
     <None Include="res\shaders\pointlight.fs" />
     <None Include="res\shaders\pointlight.vs" />
+    <None Include="res\shaders\spotlight.fs" />
+    <None Include="res\shaders\spotlight.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ressources\textures\test\awesomeface.png">
@@ -653,6 +655,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\renderer\types\UniformBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\game\entities\lights\SpotLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

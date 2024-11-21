@@ -33,10 +33,6 @@ const unsigned int SCR_HEIGHT = 1080;
 
 static void UpdateLights(const Scene& scene, Camera& camera)
 {
-    Matrix view = camera.GetViewMatrix();
-    Matrix projection = camera.GetProjectionMatrix();
-    Vec3 viewpos = camera.GetTransform()->GetPosition();
-
     // Iterate through lights in the scene
     const auto& pointLights = scene.GetLights("PointLight");
 
@@ -44,9 +40,6 @@ static void UpdateLights(const Scene& scene, Camera& camera)
     {
         auto pointLight = std::static_pointer_cast<PointLight>(light);
         std::shared_ptr<Shader> shader = pointLight->GetShader();
-        shader->setUniformMat4f("view", view);
-        shader->setUniformMat4f("projection", projection);
-        shader->setUniform3f("viewPos", viewpos);
         shader->setUniform1i("material.diffuse", 0);
         shader->setUniform1i("material.specular", 1);
         shader->setUniform1f("material.shininess", 78.0f);
@@ -58,23 +51,28 @@ static void UpdateLights(const Scene& scene, Camera& camera)
         shader->setUniform1f("pointLights.linear", pointLight->GetLinear());
         shader->setUniform1f("pointLights.quadratic", pointLight->GetQuadratic());
     }  
-    /*
-    if (auto spotLight = dynamic_cast<SpotLight*>(light)) {
-        Shader* shader = spotLight->GetShader();
-        shader->setUniformMat4f("view", view);
-        shader->setUniformMat4f("projection", projection);
-        shader->setUniform3f("viewPos", viewpos);
+    
+    // Iterate through lights in the scene
+    const auto& spotLights = scene.GetLights("SpotLight");
+
+    for (const auto& light : spotLights)
+    {
+        auto spotLight = std::static_pointer_cast<SpotLight>(light);
+        std::shared_ptr<Shader> shader = spotLight->GetShader();
         shader->setUniform1i("material.diffuse", 0);
-        shader->setUniform1i("material.specular", 2);
-        shader->setUniform1f("material.shininess", 56.0f);
-        shader->setUniform3f("pointLights[].position", spotLight->GetPosition());
-        shader->setUniform3f("pointLights[].ambient", spotLight->GetColor() * 0.1f);
-        shader->setUniform3f("pointLights[].diffuse", spotLight->GetColor() * 0.2f);
-        shader->setUniform3f("pointLights[].specular", spotLight->GetColor() * 0.3f);
-        shader->setUniform1f("pointLights[].cutOff", spotLight->GetCutOff());
-        shader->setUniform1f("pointLights[].outerCutOff", spotLight->GetOuterCutOff());
-    }
-    */
+        shader->setUniform1i("material.specular", 1);
+        shader->setUniform1f("material.shininess", 78.0f);
+        shader->setUniform3f("spotLight.position", spotLight->GetPosition());
+        shader->setUniform3f("spotLight.direction", spotLight->GetDirection());
+        shader->setUniform1f("spotLight.cutOff", spotLight->GetCutOff());
+        shader->setUniform1f("spotLight.outerCutOff", spotLight->GetOuterCutOff());
+        shader->setUniform1f("spotLight.constant", spotLight->GetConstant());
+        shader->setUniform1f("spotLight.linear", spotLight->GetLinear());
+        shader->setUniform1f("spotLight.quadratic", spotLight->GetQuadratic());
+        shader->setUniform3f("spotLight.ambient", spotLight->GetColor() * 0.1f);
+        shader->setUniform3f("spotLight.diffuse", spotLight->GetColor() * 0.2f);
+        shader->setUniform3f("spotLight.specular", spotLight->GetColor() * 0.3f);
+    }  
 }
 
 int main()
@@ -86,6 +84,7 @@ int main()
     Vec3 LightPositions[] =
     {
         Vec3(0.f, 0.3f, 0.f),
+        Vec3(0.f, 2.0f, 0.5f)
     };
 
     Scene scene;
@@ -108,6 +107,7 @@ int main()
     // SHADERS ===================
     std::cout << "[ LOADING SHADERS ]" << std::endl;
     //auto basic = resourceManager->LoadResource<Shader>("res/shaders/standard");
+    auto spotLightShader = resourceManager->LoadResource<Shader>("res/shaders/spotlight");
     auto pointLightShader = resourceManager->LoadResource<Shader>("res/shaders/pointlight");
     auto lightSourceShader = resourceManager->LoadResource<Shader>("res/shaders/lightsource");
     auto gridShader = resourceManager->LoadResource<Shader>("res/shaders/floorgrid");
@@ -160,11 +160,22 @@ int main()
     // Enable cursor capture
     glfwSetInputMode(wnd.getGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     
-    // Lights
-    const Vec3 lightColor = Vec3(0.9686f, 0.9216f, 0.7922f);
-    auto light1 = std::make_shared<PointLight>(LightPositions[0], lightColor, 1.0f, 0.09f, 0.032f, pointLightShader);
+    // Light properties
+    const Vec3 lightColor = Vec3(0.9686f, 0.9216f, 0.7922f); // Color of the light
+    const Vec3 lightColor2 = Vec3(0.5f, 0.5f, 0.0f); // Color of the light
+    const Vec3 lightDirection = Vec3(0.0f, -1.0f, 0.f); // Direction of the spotlight (negative Z-axis)
+
+    // SpotLight parameters
+    float cutOff = cos(MATH_DEG_TO_RAD(20.5f));  // Spotlight's inner cone cutoff (12.5 degrees)
+    float outerCutOff = cos(MATH_DEG_TO_RAD(35.5f));  // Spotlight's outer cone cutoff (17.5 degrees)
+
+    // Create light objects
+    auto light1 = std::make_shared<PointLight>(LightPositions[0], lightColor, 1.0f, 0.09f, 0.032f, pointLightShader);  // Point light
+    auto light2 = std::make_shared<SpotLight>(LightPositions[1], lightDirection, lightColor2, cutOff, outerCutOff, spotLightShader);  // Spotlight
+
 
     scene.AddLight("PointLight", light1);
+    scene.AddLight("SpotLight", light2);
     UpdateLights(scene, camera);
 
     glEnable(GL_DEPTH_TEST);
@@ -232,19 +243,26 @@ int main()
         lightSphere->Render(lightSourceShader, viewUniformsData);
 
         // Render point lights
-        for (const auto& light : scene.GetLights("PointLight"))
-        {
-            //light->GetShader()->setUniformMat4f("model", Room312->GetTransformMatrix());
-            //Room312->Render(light->GetShader(), viewUniformsData);
-            //light->GetShader()->setUniformMat4f("model", stairs->GetTransformMatrix());
-            //stairs->Render(light->GetShader(), viewUniformsData);
-            light->GetShader()->setUniformMat4f("model", floor->GetTransformMatrix());
-            floor->Render(light->GetShader(), viewUniformsData);
-            light->GetShader()->setUniformMat4f("model", cube1m->GetTransformMatrix());
-            cube1m->Render(light->GetShader(), viewUniformsData);
-            light->GetShader()->setUniformMat4f("model", cube1m2->GetTransformMatrix());
-            cube1m2->Render(light->GetShader(), viewUniformsData);
-        }
+        //for (const auto& light : scene.GetLights("PointLight"))
+        UpdateLights(scene, camera);
+        
+        /*
+        light1->GetShader()->setUniformMat4f("model", floor->GetTransformMatrix());
+        floor->Render(light1->GetShader(), viewUniformsData);
+        light1->GetShader()->setUniformMat4f("model", cube1m->GetTransformMatrix());
+        cube1m->Render(light1->GetShader(), viewUniformsData);
+        light1->GetShader()->setUniformMat4f("model", cube1m2->GetTransformMatrix());
+        cube1m2->Render(light1->GetShader(), viewUniformsData);
+        */
+        
+        light2->GetShader()->setUniformMat4f("model", floor->GetTransformMatrix());
+        floor->Render(light2->GetShader(), viewUniformsData);
+        light2->GetShader()->setUniformMat4f("model", cube1m->GetTransformMatrix());
+        cube1m->Render(light2->GetShader(), viewUniformsData);
+        light2->GetShader()->setUniformMat4f("model", cube1m2->GetTransformMatrix());
+        cube1m2->Render(light2->GetShader(), viewUniformsData);
+        
+
  
         //nightSky.Render(camera.GetViewMatrix(), camera.GetProjectionMatrix());
         

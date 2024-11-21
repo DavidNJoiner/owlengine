@@ -190,6 +190,8 @@
     <None Include="res\shaders\basic.vs" />
     <None Include="res\shaders\pointlight.fs" />
     <None Include="res\shaders\pointlight.vs" />
+    <None Include="res\shaders\spotlight.fs" />
+    <None Include="res\shaders\spotlight.vs" />
     <None Include="res\shaders\standard.fs" />
     <None Include="res\shaders\standard.vs" />
     <None Include="res\shaders\floorgrid.fs" />
@@ -229,6 +231,7 @@
     <ClInclude Include="include\game\entities\lights\DirectionalLight.h" />
     <ClInclude Include="include\game\entities\lights\ILightEntity.h" />
     <ClInclude Include="include\game\entities\lights\PointLight.h" />
+    <ClInclude Include="include\game\entities\lights\SpotLight.h" />
     <ClInclude Include="include\game\Scene.h" />
     <ClInclude Include="include\renderer\types\Resource.h" />
     <ClInclude Include="include\renderer\types\UniformBuffer.h" />
