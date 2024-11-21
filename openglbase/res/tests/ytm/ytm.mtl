@@ -1,0 +1,308 @@
+# Blender 4.1.1 MTL File: 'Young Tommy TLOU 1.blend'
+# www.blender.org
+
+newmtl tommy-arms-01-u1-s1
+Ka 1.000000 1.000000 1.000000
+Ks 0.527273 0.527273 0.527273
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tommy-arms-01-color.dds
+map_Ns tommy-arms-01-roughness.png
+map_Bump -bm 1.000000 tommy-arms-01-normal.png
+
+newmtl tommy-boot-01-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.739394 0.739394 0.739394
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tommy-boot-01-color.dds
+map_Bump -bm 1.000000 tommy-boot-01-normal.dds
+
+newmtl tommy-caruncle-01-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd ellie-caruncle-color.dds
+map_Ks default-color-white.dds
+map_Bump -bm 1.000000 ellie-caruncle-normal.dds
+
+newmtl tommy-eyebrows-01-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-eyebrows-01-color.dds
+map_d tommy-eyebrows-01-trans.dds
+map_Bump -bm 1.000000 tommy-eyebrows-01-normal.dds
+
+newmtl tommy-eyelashes-01-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd NoesisBrown.dds
+map_d eyelashes-trans.dds
+map_Bump -bm 1.000000 eyelashes-normal.dds
+
+newmtl tommy-eyes-01-u1-s1
+Ns 1000.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tommy-eyes-01-iris-color.dds
+
+newmtl tommy-hair-01-a-dither-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u1-color.dds
+map_d tommy-hair-01-u3-2-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u1-normal.dds
+
+newmtl tommy-hair-01-a-dither-u1-s1.001
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u1-color.dds
+map_d tommy-hair-01-u3-2-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u1-normal.dds
+
+newmtl tommy-hair-01-a-dither-u1-s1.002
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u1-color.dds
+map_d tommy-hair-01-u3-2-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u1-normal.dds
+
+newmtl tommy-hair-01-b-dither-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u1-color.dds
+map_d tommy-hair-01-u3-2-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u1-normal.dds
+
+newmtl tommy-hair-01-c-alpha-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u1-color.dds
+map_d tommy-hair-01-u3-2-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u1-normal.dds
+
+newmtl tommy-hair-01-c-alpha-u1-s1.001
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u1-color.dds
+map_d tommy-hair-01-u3-2-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u1-normal.dds
+
+newmtl tommy-hair-01-d-alpha-u2-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd tommy-hair-01-u2-color.dds
+map_d tommy-hair-01-u2-trans.png
+map_Bump -bm 1.000000 NoesisNRM.dds
+
+newmtl tommy-hair-01-e-dither-u3-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u3-color.dds
+map_d tommy-hair-01-u1-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u3-normal.dds
+
+newmtl tommy-hair-01-e-dither-u3-s1.001
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u3-color.dds
+map_d tommy-hair-01-u3-2-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u3-normal.dds
+
+newmtl tommy-hair-01-f-alpha-u3-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u3-color.dds
+map_d tommy-hair-01-u4-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u3-normal.dds
+
+newmtl tommy-hair-01-g-dither-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u1-color.dds
+map_d tommy-hair-01-u3-2-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u1-normal.dds
+
+newmtl tommy-hair-01-h-alpha-u4-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u4-color.dds
+map_d tommy-hair-seatle-flying-transp2.png
+map_Bump -bm 1.000000 tommy-hair-01-u4-normal.dds
+
+newmtl tommy-hair-01-h-alpha-u4-s1.001
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd tommy-hair-01-u4-color.dds
+map_d tommy-hair-01-u4-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u4-normal.dds
+
+newmtl tommy-hair-01-i-dither-u4-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd NoesisBrown.dds
+map_d tommy-hair-01-u4-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u4-normal.dds
+
+newmtl tommy-hair-01-i-dither-u4-s1.001
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd NoesisBrown.dds
+map_d tommy-hair-01-u4-trans.dds
+map_Bump -bm 1.000000 tommy-hair-01-u4-normal.dds
+
+newmtl tommy-pnt-01-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.536364 0.536364 0.536364
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tommy-pnt-01-color.dds
+map_Bump -bm 1.000000 tommy-seatle-pants-normal.dds
+
+newmtl tommy-shirt-01-u1-s1
+Ns 58.154770
+Ka 1.000000 1.000000 1.000000
+Ks 0.078788 0.078788 0.078788
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tommy-shirt-01-color.dds
+map_Bump -bm 1.000000 tommy-shirt-01-normal.dds
+
+newmtl tommy-stubble-01-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd NoesisBrown.dds
+map_d tommy-stubble-01-trans.dds
+map_Bump -bm 1.000000 tommy-stubble-01-normal.dds
+
+newmtl tommy-tears-01-u1-s1
+Ns 943.726746
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_d tear-mask.png
+map_Bump -bm 1.000000 tear-normal_E8B7B3A9D71975E6.dds
+
+newmtl tommy_face
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.236364 0.236364 0.236364
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl u-saliva-01-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd D:/CODE/Diffuse Texture
+map_Bump -bm 1.000000 u-saliva-01-u1-s1-normal.dds
+
+newmtl u-teeth-01-u1-s1
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd u-teeth-01-u1-s1-color.dds
+map_Bump -bm 1.000000 u-teeth-01-u1-s1-normal.dds

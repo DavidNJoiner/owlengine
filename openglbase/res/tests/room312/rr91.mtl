@@ -1,0 +1,142 @@
+# Blender 4.1.1 MTL File: 'rr91.blend'
+# www.blender.org
+
+newmtl diffuse0
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse0.jpg
+map_d diffuse0.jpg
+
+newmtl diffuse1
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse1.tga
+map_d diffuse1.tga
+
+newmtl diffuse10
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse10.tga
+map_d diffuse10.tga
+
+newmtl diffuse11
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse11.tga
+map_d diffuse11.tga
+
+newmtl diffuse12
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse12.tga
+map_d diffuse12.tga
+
+newmtl diffuse13
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse13.tga
+map_d diffuse13.tga
+
+newmtl diffuse2
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse2.tga
+map_d diffuse2.tga
+
+newmtl diffuse3
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse3.tga
+map_d diffuse3.tga
+
+newmtl diffuse4
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse4.tga
+map_d diffuse4.tga
+
+newmtl diffuse5
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse5.tga
+map_d diffuse5.tga
+
+newmtl diffuse6
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse6.tga
+map_d diffuse6.tga
+
+newmtl diffuse7
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse7.tga
+map_d diffuse7.tga
+
+newmtl diffuse8
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse8.tga
+map_d diffuse8.tga
+
+newmtl diffuse9
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 9
+map_Kd diffuse9.tga
+map_d diffuse9.tga

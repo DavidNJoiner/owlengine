@@ -1,0 +1,120 @@
+# Wavefront MTL
+# Created by fragMOTION
+# http://www.fragmosoft.com
+
+newmtl 6072_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6072.tga
+map_Kn 6072.tga
+
+newmtl 6073_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6073.tga
+map_Kn 6073.tga
+
+newmtl 6074_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6074.tga
+map_Kn 6074.tga
+
+newmtl 6077_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6077.tga
+map_Kn 6077.tga
+
+newmtl 6078_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6078.tga
+map_Kn 6078.tga
+
+newmtl 6079_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6079.tga
+map_Kn 6079.tga
+
+newmtl 6081_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6081.tga
+map_Kn 6081.tga
+
+newmtl 6082_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6082.tga
+map_Kn 6082.tga
+
+newmtl 6085_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6085.tga
+map_Kn 6085.tga
+
+newmtl 6086_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6086.tga
+map_Kn 6086.tga
+
+newmtl 6087_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6087.tga
+map_Kn 6087.tga
+
+newmtl 6083_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6083.tga
+map_Kn 6083.tga
+
+newmtl 6075alpha_mtl
+ka 1 1 1
+kd 1 1 1
+ks 1 1 1
+ke 0 0 0
+ns 40
+map_Kd 6075.tga
+map_Kn 6075.tga

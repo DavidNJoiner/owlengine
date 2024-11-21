@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{f5e7035b-cb45-4b5a-b514-b927e7adcfda}</ProjectGuid>
+    <RootNamespace>openglbase</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>D:\CODE\openglbase\openglbase\include;D:\CODE\openglbase\openglbase\vendor\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\CODE\openglbase\openglbase\vendor\libs;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\CODE\openglbase\openglbase\vendor\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\CODE\openglbase\openglbase\vendor\libs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>D:\CODE\openglbase\openglbase\vendor\include\Assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>D:\CODE\openglbase\openglbase\vendor\include\Assimp;D:\CODE\openglbase\openglbase\vendor\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\IComponent.cpp" />
+    <ClCompile Include="src\core\IEntity.cpp" />
+    <ClCompile Include="src\game\CameraController.cpp" />
+    <ClCompile Include="src\game\entities\lights\PointLight.cpp" />
+    <ClCompile Include="src\game\PlayerController.cpp" />
+    <ClCompile Include="src\game\Scene.cpp" />
+    <ClCompile Include="src\renderer\Transform.cpp" />
+    <ClCompile Include="src\renderer\types\UniformBuffer.cpp" />
+    <ClCompile Include="src\systems\InputManager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\renderer\Camera.cpp" />
+    <ClCompile Include="src\renderer\types\CubeMap.cpp" />
+    <ClCompile Include="src\renderer\math\Frustum.cpp" />
+    <ClCompile Include="src\renderer\math\Matrix.cpp" />
+    <ClCompile Include="src\renderer\math\Quaternion.cpp" />
+    <ClCompile Include="src\renderer\math\Vec2.cpp" />
+    <ClCompile Include="src\renderer\math\Vec3.cpp" />
+    <ClCompile Include="src\renderer\math\Vec4.cpp" />
+    <ClCompile Include="src\renderer\Mesh.cpp" />
+    <ClCompile Include="src\renderer\Model.cpp" />
+    <ClCompile Include="src\renderer\physx\AABB.cpp" />
+    <ClCompile Include="src\renderer\physx\BoundingSphere.cpp" />
+    <ClCompile Include="src\renderer\physx\Plane.cpp" />
+    <ClCompile Include="src\renderer\physx\Ray.cpp" />
+    <ClCompile Include="src\systems\TimeManager.cpp" />
+    <ClCompile Include="src\renderer\types\IndexBuffer.cpp" />
+    <ClCompile Include="src\renderer\types\Shader.cpp" />
+    <ClCompile Include="src\renderer\types\Texture2D.cpp" />
+    <ClCompile Include="src\renderer\types\VertexArray.cpp" />
+    <ClCompile Include="src\renderer\types\VertexBuffer.cpp" />
+    <ClCompile Include="src\renderer\Window.cpp" />
+    <ClCompile Include="vendor\include\glad\glad.c" />
+    <ClCompile Include="src\stb_image.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\renderer\math\Math.inl" />
+    <None Include="include\renderer\math\Matrix.inl" />
+    <None Include="include\renderer\math\Quaternion.inl" />
+    <None Include="include\renderer\math\Vec2.inl" />
+    <None Include="include\renderer\math\Vec4.inl" />
+    <None Include="include\renderer\physx\AABB.inl" />
+    <None Include="include\renderer\physx\BoundingSphere.inl" />
+    <None Include="include\renderer\physx\Plane.inl" />
+    <None Include="include\renderer\physx\Ray.inl" />
+    <None Include="res\shaders\basic.fs" />
+    <None Include="res\shaders\basic.vs" />
+    <None Include="res\shaders\pointlight.fs" />
+    <None Include="res\shaders\pointlight.vs" />
+    <None Include="res\shaders\standard.fs" />
+    <None Include="res\shaders\standard.vs" />
+    <None Include="res\shaders\floorgrid.fs" />
+    <None Include="res\shaders\floorgrid.vs" />
+    <None Include="res\shaders\lightsource.fs" />
+    <None Include="res\shaders\lightsource.vs" />
+    <None Include="res\shaders\skybox.fs" />
+    <None Include="res\shaders\skybox.vs" />
+    <None Include="include\renderer\math\Vec3.inl" />
+    <None Include="vendor\include\Assimp\color4.inl" />
+    <None Include="vendor\include\Assimp\material.inl" />
+    <None Include="vendor\include\Assimp\matrix3x3.inl" />
+    <None Include="vendor\include\Assimp\matrix4x4.inl" />
+    <None Include="vendor\include\Assimp\quaternion.inl" />
+    <None Include="vendor\include\Assimp\SmoothingGroups.inl" />
+    <None Include="vendor\include\Assimp\vector2.inl" />
+    <None Include="vendor\include\Assimp\vector3.inl" />
+    <None Include="vendor\libs\assimp-vc143-mtd.pdb" />
+    <None Include="vendor\libs\glfw3.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\tests\stairs\worn.png" />
+    <Image Include="res\textures\skybox\back.png" />
+    <Image Include="res\textures\skybox\bottom.png" />
+    <Image Include="res\textures\skybox\front.png" />
+    <Image Include="res\textures\skybox\left.png" />
+    <Image Include="res\textures\skybox\right.png" />
+    <Image Include="res\textures\skybox\top.png" />
+    <Image Include="ressources\textures\test\awesomeface.png" />
+    <Image Include="ressources\textures\test\bronze_diff.png" />
+    <Image Include="ressources\textures\test\graffiti.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\core\ICamera.h" />
+    <ClInclude Include="include\core\ITexture.h" />
+    <ClInclude Include="include\core\pch.h" />
+    <ClInclude Include="include\core\IController.h" />
+    <ClInclude Include="include\game\entities\lights\DirectionalLight.h" />
+    <ClInclude Include="include\game\entities\lights\ILightEntity.h" />
+    <ClInclude Include="include\game\entities\lights\PointLight.h" />
+    <ClInclude Include="include\game\Scene.h" />
+    <ClInclude Include="include\renderer\types\Resource.h" />
+    <ClInclude Include="include\renderer\types\UniformBuffer.h" />
+    <ClInclude Include="include\systems\InputManager.h" />
+    <ClInclude Include="include\core\IComponent.h" />
+    <ClInclude Include="include\core\IEntity.h" />
+    <ClInclude Include="include\core\ISystem.h" />
+    <ClInclude Include="include\renderer\CameraController.h" />
+    <ClInclude Include="include\game\Player.h" />
+    <ClInclude Include="include\game\PlayerController.h" />
+    <ClInclude Include="include\core\Keycodes.h" />
+    <ClInclude Include="include\renderer\Camera.h" />
+    <ClInclude Include="include\renderer\types\CubeMap.h" />
+    <ClInclude Include="include\renderer\math\Frustum.h" />
+    <ClInclude Include="include\renderer\math\Math.h" />
+    <ClInclude Include="include\renderer\math\Matrix.h" />
+    <ClInclude Include="include\renderer\math\Quaternion.h" />
+    <ClInclude Include="include\renderer\math\Vec2.h" />
+    <ClInclude Include="include\renderer\math\Vec3.h" />
+    <ClInclude Include="include\renderer\math\Vec4.h" />
+    <ClInclude Include="include\renderer\Mesh.h" />
+    <ClInclude Include="include\renderer\Model.h" />
+    <ClInclude Include="include\renderer\physx\AABB.h" />
+    <ClInclude Include="include\renderer\physx\BoundingSphere.h" />
+    <ClInclude Include="include\renderer\physx\Plane.h" />
+    <ClInclude Include="include\renderer\physx\Ray.h" />
+    <ClInclude Include="include\renderer\physx\Velocity.h" />
+    <ClInclude Include="include\systems\DataLoader.h" />
+    <ClInclude Include="include\systems\ResourceManager.h" />
+    <ClInclude Include="include\systems\SystemManager.h" />
+    <ClInclude Include="include\systems\TimeManager.h" />
+    <ClInclude Include="include\renderer\types\IndexBuffer.h" />
+    <ClInclude Include="include\renderer\types\Shader.h" />
+    <ClInclude Include="include\renderer\types\Texture2D.h" />
+    <ClInclude Include="include\renderer\types\VertexArray.h" />
+    <ClInclude Include="include\renderer\types\VertexBuffer.h" />
+    <ClInclude Include="include\renderer\types\VertexBufferLayout.h" />
+    <ClInclude Include="include\renderer\Window.h" />
+    <ClInclude Include="include\renderer\Transform.h" />
+    <ClInclude Include="vendor\include\Assimp\aabb.h" />
+    <ClInclude Include="vendor\include\Assimp\ai_assert.h" />
+    <ClInclude Include="vendor\include\Assimp\anim.h" />
+    <ClInclude Include="vendor\include\Assimp\AssertHandler.h" />
+    <ClInclude Include="vendor\include\Assimp\Base64.hpp" />
+    <ClInclude Include="vendor\include\Assimp\BaseImporter.h" />
+    <ClInclude Include="vendor\include\Assimp\Bitmap.h" />
+    <ClInclude Include="vendor\include\Assimp\BlobIOSystem.h" />
+    <ClInclude Include="vendor\include\Assimp\ByteSwapper.h" />
+    <ClInclude Include="vendor\include\Assimp\camera.h" />
+    <ClInclude Include="vendor\include\Assimp\cexport.h" />
+    <ClInclude Include="vendor\include\Assimp\cfileio.h" />
+    <ClInclude Include="vendor\include\Assimp\cimport.h" />
+    <ClInclude Include="vendor\include\Assimp\ColladaMetaData.h" />
+    <ClInclude Include="vendor\include\Assimp\color4.h" />
+    <ClInclude Include="vendor\include\Assimp\commonMetaData.h" />
+    <ClInclude Include="vendor\include\Assimp\Compiler\poppack1.h" />
+    <ClInclude Include="vendor\include\Assimp\Compiler\pstdint.h" />
+    <ClInclude Include="vendor\include\Assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="vendor\include\Assimp\config.h" />
+    <ClInclude Include="vendor\include\Assimp\CreateAnimMesh.h" />
+    <ClInclude Include="vendor\include\Assimp\DefaultIOStream.h" />
+    <ClInclude Include="vendor\include\Assimp\DefaultIOSystem.h" />
+    <ClInclude Include="vendor\include\Assimp\DefaultLogger.hpp" />
+    <ClInclude Include="vendor\include\Assimp\defs.h" />
+    <ClInclude Include="vendor\include\Assimp\Exceptional.h" />
+    <ClInclude Include="vendor\include\Assimp\Exporter.hpp" />
+    <ClInclude Include="vendor\include\Assimp\fast_atof.h" />
+    <ClInclude Include="vendor\include\Assimp\GenericProperty.h" />
+    <ClInclude Include="vendor\include\Assimp\GltfMaterial.h" />
+    <ClInclude Include="vendor\include\Assimp\Hash.h" />
+    <ClInclude Include="vendor\include\Assimp\Importer.hpp" />
+    <ClInclude Include="vendor\include\Assimp\importerdesc.h" />
+    <ClInclude Include="vendor\include\Assimp\IOStream.hpp" />
+    <ClInclude Include="vendor\include\Assimp\IOStreamBuffer.h" />
+    <ClInclude Include="vendor\include\Assimp\IOSystem.hpp" />
+    <ClInclude Include="vendor\include\Assimp\light.h" />
+    <ClInclude Include="vendor\include\Assimp\LineSplitter.h" />
+    <ClInclude Include="vendor\include\Assimp\LogAux.h" />
+    <ClInclude Include="vendor\include\Assimp\Logger.hpp" />
+    <ClInclude Include="vendor\include\Assimp\LogStream.hpp" />
+    <ClInclude Include="vendor\include\Assimp\material.h" />
+    <ClInclude Include="vendor\include\Assimp\MathFunctions.h" />
+    <ClInclude Include="vendor\include\Assimp\matrix3x3.h" />
+    <ClInclude Include="vendor\include\Assimp\matrix4x4.h" />
+    <ClInclude Include="vendor\include\Assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="vendor\include\Assimp\mesh.h" />
+    <ClInclude Include="vendor\include\Assimp\metadata.h" />
+    <ClInclude Include="vendor\include\Assimp\NullLogger.hpp" />
+    <ClInclude Include="vendor\include\Assimp\ObjMaterial.h" />
+    <ClInclude Include="vendor\include\Assimp\ParsingUtils.h" />
+    <ClInclude Include="vendor\include\Assimp\pbrmaterial.h" />
+    <ClInclude Include="vendor\include\Assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="vendor\include\Assimp\port\AndroidJNI\BundledAssetIOSystem.h" />
+    <ClInclude Include="vendor\include\Assimp\postprocess.h" />
+    <ClInclude Include="vendor\include\Assimp\Profiler.h" />
+    <ClInclude Include="vendor\include\Assimp\ProgressHandler.hpp" />
+    <ClInclude Include="vendor\include\Assimp\qnan.h" />
+    <ClInclude Include="vendor\include\Assimp\quaternion.h" />
+    <ClInclude Include="vendor\include\Assimp\RemoveComments.h" />
+    <ClInclude Include="vendor\include\Assimp\revision.h" />
+    <ClInclude Include="vendor\include\Assimp\scene.h" />
+    <ClInclude Include="vendor\include\Assimp\SceneCombiner.h" />
+    <ClInclude Include="vendor\include\Assimp\SGSpatialSort.h" />
+    <ClInclude Include="vendor\include\Assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="vendor\include\Assimp\SmallVector.h" />
+    <ClInclude Include="vendor\include\Assimp\SmoothingGroups.h" />
+    <ClInclude Include="vendor\include\Assimp\SpatialSort.h" />
+    <ClInclude Include="vendor\include\Assimp\StandardShapes.h" />
+    <ClInclude Include="vendor\include\Assimp\StreamReader.h" />
+    <ClInclude Include="vendor\include\Assimp\StreamWriter.h" />
+    <ClInclude Include="vendor\include\Assimp\StringComparison.h" />
+    <ClInclude Include="vendor\include\Assimp\StringUtils.h" />
+    <ClInclude Include="vendor\include\Assimp\Subdivision.h" />
+    <ClInclude Include="vendor\include\Assimp\texture.h" />
+    <ClInclude Include="vendor\include\Assimp\TinyFormatter.h" />
+    <ClInclude Include="vendor\include\Assimp\types.h" />
+    <ClInclude Include="vendor\include\Assimp\vector2.h" />
+    <ClInclude Include="vendor\include\Assimp\vector3.h" />
+    <ClInclude Include="vendor\include\Assimp\version.h" />
+    <ClInclude Include="vendor\include\Assimp\Vertex.h" />
+    <ClInclude Include="vendor\include\Assimp\XmlParser.h" />
+    <ClInclude Include="vendor\include\Assimp\XMLTools.h" />
+    <ClInclude Include="vendor\include\Assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="vendor\include\glad\glad.h" />
+    <ClInclude Include="vendor\include\GLFW\glfw3.h" />
+    <ClInclude Include="vendor\include\GLFW\glfw3native.h" />
+    <ClInclude Include="vendor\include\KHR\khrplatform.h" />
+    <ClInclude Include="include\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="vendor\libs\assimp-vc143-mtd.lib" />
+    <Library Include="vendor\libs\glfw3.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
