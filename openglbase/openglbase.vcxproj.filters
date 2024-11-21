@@ -245,9 +245,6 @@
     <Image Include="res\textures\skybox\top.png">
       <Filter>Resource Files\textures</Filter>
     </Image>
-    <Image Include="res\tests\stairs\worn.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core\IComponent.h">

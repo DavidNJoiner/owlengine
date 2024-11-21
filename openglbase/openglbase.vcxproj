@@ -211,7 +211,6 @@
     <None Include="vendor\libs\glfw3.pdb" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\tests\stairs\worn.png" />
     <Image Include="res\textures\skybox\back.png" />
     <Image Include="res\textures\skybox\bottom.png" />
     <Image Include="res\textures\skybox\front.png" />
