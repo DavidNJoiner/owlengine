@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include "core/IComponent.h"
 #include "core/IEntity.h"
+#include "renderer/types/UniformBuffer.h"
 #include "renderer/Transform.h"
 #include "math/Frustum.h"
 #include "math/Vec3.h"
@@ -23,9 +24,12 @@ public:
     const Vec3& GetFront() const { return m_Front; }
     const Vec3& GetUp() const { return m_Up; }
     const Vec3& GetRight() const { return m_Right; }
+    const float& GetNear() const { return m_NearPlane; }
+    const float& GetFar() const { return m_FarPlane; }
 
-    const Frustum& GetFrustum() const { return m_Frustum; }
+    Frustum GetFrustum() const { return m_Frustum; }
     Transform* GetTransform() const { return m_Transform; }
+    const ViewUniforms& GetViewUniform() const { return m_viewUniformsData; }
 
     void OnTransformUpdated();
 
@@ -34,8 +38,9 @@ private:
     void UpdateProjectionMatrix();
 
 private:
-    Transform* m_Transform;
+    Transform* m_Transform;// A Raw Pointer to the Transform component managed by the Camera Entity
     Frustum m_Frustum;
+    ViewUniforms m_viewUniformsData;
 
     Vec3 m_Front;
     Vec3 m_Up;

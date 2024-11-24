@@ -78,6 +78,11 @@ void Camera::OnTransformUpdated()
     Vec3::cross(m_Right, m_Front, &m_Up);
     m_Up.normalize();
 
+    // Update the camera view uniform
+    m_viewUniformsData.view = GetViewMatrix();
+    m_viewUniformsData.proj = GetProjectionMatrix();
+    m_viewUniformsData.pos = GetTransform()->GetPosition();
+    
     // Mark the view matrix as dirty to ensure it gets updated
     m_ViewDirty = true;
 }
