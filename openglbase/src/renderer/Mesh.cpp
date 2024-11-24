@@ -112,7 +112,7 @@ void Mesh::Bind(const std::shared_ptr<Shader>& shader)
     }
 }
 
-void Mesh::Render(const std::shared_ptr<Shader>& shader, ViewUniforms& viewUniform)
+void Mesh::Render(const std::shared_ptr<Shader>& shader, const ViewUniforms& viewUniform)
 {
     Bind(shader);
     m_UniformBuffer->UpdateViewUniforms(viewUniform);

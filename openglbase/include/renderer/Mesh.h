@@ -56,7 +56,7 @@ public:
         }
     }
 
-    void Render(const std::shared_ptr<Shader>& shader, ViewUniforms& viewUniform);
+    void Render(const std::shared_ptr<Shader>& shader, const ViewUniforms& viewUniform);
     void Bind(const std::shared_ptr<Shader>& shader);
     void Unbind();
     

@@ -21,7 +21,7 @@ public:
     // Instanciate a new Model from a Mesh
     Model(const std::shared_ptr<Mesh>& meshResource);
 
-    void Render(const std::shared_ptr<Shader>& shader, ViewUniforms& viewUniform);
+    void Render(const std::shared_ptr<Shader>& shader, const ViewUniforms& viewUniform);
     void Unbind();
 
     inline const void SetBufferUsage(BufferUsage usage) { m_Usage = usage; }

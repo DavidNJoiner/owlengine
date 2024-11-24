@@ -15,7 +15,7 @@ Model::Model(const std::shared_ptr<Mesh>& meshResource)
     m_Meshes.push_back(meshResource);
 }
 
-void Model::Render(const std::shared_ptr<Shader>& shader, ViewUniforms& viewUniform)
+void Model::Render(const std::shared_ptr<Shader>& shader, const ViewUniforms& viewUniform)
 {
     for (GLuint i = 0; i < m_Meshes.size(); i++)
     {
