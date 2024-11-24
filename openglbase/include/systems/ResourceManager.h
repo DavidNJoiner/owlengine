@@ -1,15 +1,10 @@
 #ifndef RESOURCE_MANAGER_H
 #define RESOURCE_MANAGER_H
 
+#include "core/pch.h"
 #include "core/ISystem.h"
+#include "renderer/types/Resource.h"
 #include "renderer/types/UniformBuffer.h"
-#include <filesystem>
-#include <memory>
-#include <mutex>
-#include <functional>
-#include <unordered_map>
-#include <string>
-#include <iostream>
 
 class ResourceManager : public ISystem
 {
