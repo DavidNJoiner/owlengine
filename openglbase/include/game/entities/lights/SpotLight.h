@@ -12,12 +12,21 @@ public:
         // Update logic for spotlight if needed
     }
 
-    const Vec3& GetDirection() const { return m_Direction; }
-    float GetCutOff() const { return m_CutOff; }
-    float GetOuterCutOff() const { return m_OuterCutOff; }
-    float GetConstant() const { return m_Constant; }
-    float GetLinear() const { return m_Linear; }
-    float GetQuadratic() const { return m_Quadratic; }
+    void SetSpotlightDirection(const Vec3& targetDirection) {
+        // Normalize the target direction
+        Vec3 normalizedTarget = targetDirection;
+        normalizedTarget.normalize();
+
+        // Update the spotlight's internal direction
+        m_Direction = normalizedTarget;
+    }
+
+    inline const Vec3& GetDirection() const { return m_Direction; }
+    inline float GetCutOff() const { return m_CutOff; }
+    inline float GetOuterCutOff() const { return m_OuterCutOff; }
+    inline float GetConstant() const { return m_Constant; }
+    inline float GetLinear() const { return m_Linear; }
+    inline float GetQuadratic() const { return m_Quadratic; }
 
 private:
     Vec3 m_Direction;
