@@ -19,8 +19,8 @@ public:
 
     const Vec3& GetPosition() const;
     const Quaternion& GetRotation() const;
-    void SetPosition(const Vec3& position);
-    void SetRotation(const Quaternion& rotation);
+    void SetPosition(Vec3& position);
+    void SetRotation(Quaternion& rotation);
 
     void ProcessKeyboardInput(float deltaTime);
     void ProcessMouseInput();

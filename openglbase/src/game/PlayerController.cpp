@@ -29,11 +29,11 @@ const Quaternion& PlayerController::GetRotation() const {
     return this->m_Transform->GetRotation();
 }
 
-void PlayerController::SetPosition(const Vec3& position) {
+void PlayerController::SetPosition(Vec3& position) {
     this->m_Transform->SetPosition(position);
 }
 
-void PlayerController::SetRotation(const Quaternion& rotation) {
+void PlayerController::SetRotation(Quaternion& rotation) {
     this->m_Transform->SetRotation(rotation);
 }
 
