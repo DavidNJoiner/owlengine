@@ -31,6 +31,7 @@
 #include <mutex>
 #include <chrono>
 #include <typeindex>
+#include <filesystem>
 
 // Bring common functions from C into global namespace
 using std::memcpy;
