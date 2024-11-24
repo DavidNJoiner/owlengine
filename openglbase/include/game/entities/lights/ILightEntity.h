@@ -18,8 +18,9 @@ public:
     virtual void Update(float deltaTime) = 0;
 
     std::shared_ptr<Shader> GetShader() { return m_Shader; }
-    const Vec3& GetPosition() const { return GetComponent<Transform>()->GetPosition(); }
-    const Vec3& GetColor() const { return m_Color; }
+    inline const Vec3& GetPosition() const { return GetComponent<Transform>()->GetPosition(); }
+    inline void SetPosition(Vec3& position) { GetComponent<Transform>()->SetPosition(position); }
+    inline const Vec3& GetColor() const { return m_Color; }
 
 protected:
     Vec3 m_Color;
