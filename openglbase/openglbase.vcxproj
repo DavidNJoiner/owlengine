@@ -148,6 +148,9 @@
     <ClCompile Include="src\game\entities\lights\PointLight.cpp" />
     <ClCompile Include="src\game\PlayerController.cpp" />
     <ClCompile Include="src\game\Scene.cpp" />
+    <ClCompile Include="src\renderer\debug\Color.cpp" />
+    <ClCompile Include="src\renderer\debug\DebugRenderer.cpp" />
+    <ClCompile Include="src\renderer\debug\Line.cpp" />
     <ClCompile Include="src\renderer\Transform.cpp" />
     <ClCompile Include="src\renderer\types\UniformBuffer.cpp" />
     <ClCompile Include="src\systems\InputManager.cpp" />
@@ -233,6 +236,9 @@
     <ClInclude Include="include\game\entities\lights\PointLight.h" />
     <ClInclude Include="include\game\entities\lights\SpotLight.h" />
     <ClInclude Include="include\game\Scene.h" />
+    <ClInclude Include="include\renderer\debug\Color.h" />
+    <ClInclude Include="include\renderer\debug\DebugRenderer.h" />
+    <ClInclude Include="include\renderer\debug\Line.h" />
     <ClInclude Include="include\renderer\types\Resource.h" />
     <ClInclude Include="include\renderer\types\UniformBuffer.h" />
     <ClInclude Include="include\systems\InputManager.h" />
@@ -271,6 +277,8 @@
     <ClInclude Include="include\renderer\types\VertexBufferLayout.h" />
     <ClInclude Include="include\renderer\Window.h" />
     <ClInclude Include="include\renderer\Transform.h" />
+    <ClInclude Include="res\shaders\debugLine.fs" />
+    <ClInclude Include="res\shaders\debugLine.vs" />
     <ClInclude Include="vendor\include\Assimp\aabb.h" />
     <ClInclude Include="vendor\include\Assimp\ai_assert.h" />
     <ClInclude Include="vendor\include\Assimp\anim.h" />

@@ -126,6 +126,15 @@
     <ClCompile Include="src\renderer\types\UniformBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\debug\Line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\debug\DebugRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\debug\Color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\standard.fs">
@@ -658,6 +667,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\game\entities\lights\SpotLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\shaders\debugLine.vs">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\shaders\debugLine.fs">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\debug\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\debug\DebugRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\debug\Line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
