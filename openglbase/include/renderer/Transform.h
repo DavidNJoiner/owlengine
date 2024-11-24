@@ -49,7 +49,8 @@ public:
     void SetRotation(const Quaternion& rot) { m_Rotation = rot; m_IsDirty = true; }
     void SetScale(const Vec3& scl) { m_Scale = scl; m_IsDirty = true; }
 
-    inline const Vec3& GetPosition() const { return m_Position; }
+    // Passing without const for now. Should reverse back to const.
+    inline Vec3& GetPosition() { return m_Position; }
     inline const Quaternion& GetRotation() const { return m_Rotation; }
     inline const Vec3& GetScale() const { return m_Scale; }
 
