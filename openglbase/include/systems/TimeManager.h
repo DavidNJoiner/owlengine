@@ -24,7 +24,7 @@ public:
     TimeManager& operator=(const TimeManager&) = delete;
     TimeManager& operator=(TimeManager&&) = delete;
 
-    void Update(float deltaTime) override {}
+    void Update(float deltaTime) override { UpdateDeltaTime(); }
 
     // Calculates our current scene's frames per second and displays it in the console
     double CalculateFrameRate(bool writeToConsole);
@@ -35,18 +35,19 @@ public:
     // Get the delta time for the current frame
     double GetDeltaTime() const { return m_DeltaTime.load(); }
 
+    
+
+    // Pauses the current thread for an amount of time in milliseconds
+    void Sleep(int milliseconds) const {
+        std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+    }
+private:
     // Updates delta time based on the current time
     void UpdateDeltaTime() {
         double currentTime = GetTime();
         double lastTime = m_LastTime.exchange(currentTime); // Atomically update last time
         m_DeltaTime.store(currentTime - lastTime);
     }
-
-    // Pauses the current thread for an amount of time in milliseconds
-    void Sleep(int milliseconds) const {
-        std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
-    }
-
 private:
     std::atomic<double> m_DeltaTime;
     std::atomic<double> m_LastTime;
