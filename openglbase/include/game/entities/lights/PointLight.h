@@ -5,8 +5,8 @@
 
 class PointLight : public ILightEntity {
 public:
-    PointLight(const Vec3& position, const Vec3& color, float constant, float linear, float quadratic, const std::shared_ptr<Shader>& shader)
-        : ILightEntity(position, color, shader), m_Constant(constant), m_Linear(linear), m_Quadratic(quadratic)
+    PointLight(const Vec3& position, const Color& color, float constant = 0.9f, float linear = 0.09f, float quadratic = 0.032f)
+        : ILightEntity(position, color), m_Constant(constant), m_Linear(linear), m_Quadratic(quadratic)
     {}
 
     void Update(float deltaTime) override {

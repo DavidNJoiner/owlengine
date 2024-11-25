@@ -5,8 +5,8 @@
 
 class SpotLight : public ILightEntity {
 public:
-    SpotLight(const Vec3& position, const Vec3& direction, const Vec3& color, float cutOff, float outerCutOff, const std::shared_ptr<Shader>& shader)
-        : ILightEntity(position, color, shader), m_Direction(direction), m_CutOff(cutOff), m_OuterCutOff(outerCutOff) {}
+    SpotLight(const Vec3& position, const Color& color, const Vec3& direction = Vec3(0.0f), float cutOff = cos(MATH_DEG_TO_RAD(5.5f)), float outerCutOff = cos(MATH_DEG_TO_RAD(25.5f)))
+        : ILightEntity(position, color), m_Direction(direction), m_CutOff(cutOff), m_OuterCutOff(outerCutOff) {}
 
     void Update(float deltaTime) override {
         // Update logic for spotlight if needed
