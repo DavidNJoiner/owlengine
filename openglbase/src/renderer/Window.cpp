@@ -2,7 +2,7 @@
 #include <iostream>
 
 Window::Window(const char* title, int width, int height)
-    : backgroundColor(Vec4(0.1f, 0.1f, 0.1f, 1.0f)), m_Title(title), m_Width((float)width), m_Height((float)height),
+    : backgroundColor(Vec4(0.1f, 0.1f, 0.1f, 1.0f)), m_Title(title), m_width((float)width), m_height((float)height),
     m_Window(nullptr), m_Closed(false)
 {
     if (!init())
@@ -25,7 +25,7 @@ bool Window::init()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
+    m_Window = glfwCreateWindow(m_width, m_height, m_Title, NULL, NULL);
     if (m_Window == NULL)
     {
         std::cerr << "Failed to create GLFW window" << std::endl;
@@ -70,7 +70,7 @@ void Window::glfw_initialisation_error(int error, const char* description)
 void Window::window_resize_callback(GLFWwindow* window, int width, int height)
 {
     Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
-    win->m_Width = width;
-    win->m_Height = height;
+    win->m_width = width;
+    win->m_height = height;
     glViewport(0, 0, width, height);
 }

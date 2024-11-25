@@ -18,8 +18,8 @@ public:
 
 private:
     static VertexBufferLayout m_debugVertexlayout;
-    static std::shared_ptr<Shader> m_lineShader;
-    static std::shared_ptr<Shader> m_gridShader;
+    static std::shared_ptr<Shader> m_shader_debugline;
+    static std::shared_ptr<Shader> m_shader_worldgrid;
     static std::vector<Line*> s_lines;
     static std::vector<DebugVertex> vertexData;
     static std::unique_ptr<VertexArray> va;

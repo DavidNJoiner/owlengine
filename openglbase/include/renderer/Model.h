@@ -16,21 +16,20 @@
 class Model : public IComponent, public Resource
 {
 public:
-    // Instanciate a Model
     Model(const std::string& path);
-    // Instanciate a new Model from a Mesh
     Model(const std::shared_ptr<Mesh>& meshResource);
 
     void Render(const std::shared_ptr<Shader>& shader, const ViewUniforms& viewUniform);
     void Unbind();
 
     inline const void SetBufferUsage(BufferUsage usage) { m_Usage = usage; }
-    inline const void AddMesh(std::shared_ptr<Mesh>& mesh) { m_Meshes.push_back(mesh); }
+
     inline const Model* GetModel() { return this; };
     inline const Vec3& GetPosition() { return GetSubComponent<Transform>()->GetPosition(); }
     inline const Matrix& GetTransformMatrix() { return GetSubComponent<Transform>()->GetTransformMatrix(); }
 
     inline void SetPosition(const Vec3& pos) { GetSubComponent<Transform>()->SetPosition(pos); }
+    inline void SetScale(const float scalar) { GetSubComponent<Transform>()->SetScale(scalar); }
     const std::string& GetPath() const { return m_Path; }
     
 
@@ -40,7 +39,7 @@ private:
     
     void ProcessNode(aiNode* node, const aiScene* scene);
     void ProcessMesh(aiMesh* mesh, const aiScene* scene);
-    std::shared_ptr<Texture2D> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+    std::shared_ptr<Texture2D> LoadMaterialTextures(aiMaterial* mat, aiTextureType type);
 
 private:
     BufferUsage m_Usage = BufferUsage::None;

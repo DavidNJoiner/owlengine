@@ -143,10 +143,10 @@
     <None Include="res\shaders\standard.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
-    <None Include="res\shaders\floorgrid.fs">
+    <None Include="res\shaders\gl_worldgrid.fs">
       <Filter>Resource Files\shaders</Filter>
     </None>
-    <None Include="res\shaders\floorgrid.vs">
+    <None Include="res\shaders\gl_worldgrid.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
     <None Include="res\shaders\skybox.fs">
@@ -155,10 +155,10 @@
     <None Include="res\shaders\skybox.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
-    <None Include="res\shaders\lightsource.fs">
+    <None Include="res\shaders\gl_lightsource.fs">
       <Filter>Resource Files\shaders</Filter>
     </None>
-    <None Include="res\shaders\lightsource.vs">
+    <None Include="res\shaders\gl_lightsource.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
     <None Include="res\shaders\basic.fs">
@@ -223,10 +223,10 @@
     </None>
     <None Include="vendor\libs\assimp-vc143-mtd.pdb" />
     <None Include="vendor\libs\glfw3.pdb" />
-    <None Include="res\shaders\pointlight.fs" />
-    <None Include="res\shaders\pointlight.vs" />
-    <None Include="res\shaders\spotlight.fs" />
-    <None Include="res\shaders\spotlight.vs" />
+    <None Include="res\shaders\rain.vs" />
+    <None Include="res\shaders\rain.fs" />
+    <None Include="res\shaders\gl_worldlights.fs" />
+    <None Include="res\shaders\gl_worldlights.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ressources\textures\test\awesomeface.png">
@@ -669,10 +669,10 @@
     <ClInclude Include="include\game\entities\lights\SpotLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="res\shaders\debugLine.vs">
+    <ClInclude Include="res\shaders\gl_debugline.vs">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="res\shaders\debugLine.fs">
+    <ClInclude Include="res\shaders\gl_debugline.fs">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\renderer\debug\Color.h">

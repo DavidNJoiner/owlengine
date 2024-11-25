@@ -10,8 +10,8 @@ public:
     Color(float r = 1.0f, float g = 1.0f, float b = 1.0f, float a = 1.0f)
         : r(r), g(g), b(b), a(a) {}
 
-    const Vec4 ToVec4() { return Vec4(r, g, b, a); }
-    const Vec3 ToVec3() { return Vec3(r, g, b); }
+    inline const Vec4 ToVec4() { return Vec4(r, g, b, a); }
+    inline const Vec3 ToVec3() { return Vec3(r, g, b); }
 
     static const Color White;
     static const Color Red;

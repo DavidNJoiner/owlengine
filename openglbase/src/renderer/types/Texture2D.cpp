@@ -3,61 +3,136 @@
 #include "stb_image.h"
 
 Texture2D::Texture2D(const std::string& path, int slotID)
-    : ITexture(), m_SlotID(slotID), m_Width(0), m_Height(0), m_nrChannels(0)
+    : ITexture(TextureType::TEXTURE_2D, TextureFormat::RGB),
+    m_slotID(slotID),
+    m_nrChannels(0)
 {
-    SetResourcePath(path);
+    if (!path.empty()) {
+        SetResourcePath(path);
+        Load(path);
+    }
 }
 
-Texture2D::~Texture2D() 
+Texture2D::~Texture2D()
 {
-    Unload();
+    // Base class destructor will handle texture deletion
 }
 
-bool Texture2D::Load()
+// Move constructor
+Texture2D::Texture2D(Texture2D&& other) noexcept
+    : ITexture(std::move(other)),
+    Resource(std::move(other)),
+    m_slotID(other.m_slotID),
+    m_nrChannels(other.m_nrChannels)
 {
-    stbi_set_flip_vertically_on_load(true);
-    unsigned char* image = stbi_load(m_Path.c_str(), &m_Width, &m_Height, &m_nrChannels, 0);
-    if (!image)
-    {
-        std::cerr << "TEXTURE_LOADING::FAILED_TO_LOAD_TEXTURE " << m_Path << std::endl;
+    other.m_slotID = 0;
+    other.m_nrChannels = 0;
+}
+
+// Move assignment operator
+Texture2D& Texture2D::operator=(Texture2D&& other) noexcept
+{
+    if (this != &other) {
+        ITexture::operator=(std::move(other));
+        Resource::operator=(std::move(other));
+
+        m_slotID = other.m_slotID;
+        m_nrChannels = other.m_nrChannels;
+
+        other.m_slotID = 0;
+        other.m_nrChannels = 0;
+    }
+    return *this;
+}
+
+// Copy constructor
+Texture2D::Texture2D(const Texture2D& other)
+    : ITexture(other),
+    Resource(other),
+    m_slotID(other.m_slotID),
+    m_nrChannels(other.m_nrChannels)
+{
+    if (!other.GetResourcePath().empty()) {
+        Load(other.GetResourcePath());
+    }
+}
+
+// Copy assignment operator
+Texture2D& Texture2D::operator=(const Texture2D& other)
+{
+    if (this != &other) {
+        ITexture::operator=(other);
+        Resource::operator=(other);
+
+        m_slotID = other.m_slotID;
+        m_nrChannels = other.m_nrChannels;
+
+        if (!other.GetResourcePath().empty()) {
+            Load(other.GetResourcePath());
+        }
+    }
+    return *this;
+}
+
+bool Texture2D::Load(const std::string& path)
+{
+    // Use provided path or existing resource path
+    std::string loadPath = path.empty() ? GetResourcePath() : path;
+
+    if (loadPath.empty()) {
+        std::cerr << "TEXTURE_LOADING::NO_PATH_PROVIDED" << std::endl;
         return false;
     }
-    else
-    {
-        std::cout << "      Loaded texture: " << m_Path << " (" << m_Width << "x" << m_Height << ", " << m_nrChannels << " channels)" << std::endl;
+
+    stbi_set_flip_vertically_on_load(true);
+    unsigned char* image = stbi_load(loadPath.c_str(), &m_width, &m_height, &m_nrChannels, 0);
+
+    if (!image) {
+        std::cerr << "TEXTURE_LOADING::FAILED_TO_LOAD_TEXTURE " << loadPath << std::endl;
+        return false;
     }
 
-    GLint imageFormat = (m_nrChannels == 4) ? GL_RGBA : GL_RGB;
+    std::cout << "Loaded texture: " << loadPath << " ("
+        << m_width << "x" << m_height << ", "
+        << m_nrChannels << " channels)" << std::endl;
 
-    glGenTextures(1, &m_ID);
-    glBindTexture(GL_TEXTURE_2D, m_ID);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, imageFormat, m_Width, m_Height, 0, imageFormat, GL_UNSIGNED_BYTE, image);
+    // Determine format based on number of channels
+    GLenum format = (m_nrChannels == 4) ? GL_RGBA : GL_RGB;
+
+    // Bind and configure texture
+    Bind();
+
+    // Set texture parameters before loading image
+    SetTextureParameters(GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT);
+
+    // Load texture image
+    glTexImage2D(GL_TEXTURE_2D, 0, format, m_width, m_height, 0, format, GL_UNSIGNED_BYTE, image);
+
+    // Generate mipmaps
     glGenerateMipmap(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, 0);
 
+    // Free image data
     stbi_image_free(image);
+
+    // Unbind texture
+    Unbind();
+
+    // Update resource path if a new path was provided
+    if (!path.empty()) {
+        SetResourcePath(path);
+    }
+
     return true;
 }
 
-void Texture2D::Bind()
+void Texture2D::Bind(GLuint textureUnit) const
 {
-    glActiveTexture(GL_TEXTURE0 + m_SlotID);
-    glBindTexture(GL_TEXTURE_2D, m_ID);
+    // Use base class bind method
+    ITexture::Bind(textureUnit); // TextureUnit for diffuse is 0 by default
 }
 
-void Texture2D::Unbind()
+void Texture2D::Unbind() const
 {
-    glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-void Texture2D::Unload() 
-{
-    if (m_ID != 0) {
-        glDeleteTextures(1, &m_ID); // Delete the texture
-        m_ID = 0; // Reset the texture ID
-    }
+    // Use base class unbind method
+    ITexture::Unbind();
 }

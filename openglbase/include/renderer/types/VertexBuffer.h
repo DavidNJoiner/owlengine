@@ -14,5 +14,6 @@ public:
 
     void Bind() const;
     void Unbind() const;
+    void UpdateData(const void* data, size_t size);
 };
 #endif

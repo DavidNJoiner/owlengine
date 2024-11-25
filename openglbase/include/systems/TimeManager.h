@@ -35,8 +35,7 @@ public:
     // Get the delta time for the current frame
     double GetDeltaTime() const { return m_DeltaTime.load(); }
 
-    
-
+   
     // Pauses the current thread for an amount of time in milliseconds
     void Sleep(int milliseconds) const {
         std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));

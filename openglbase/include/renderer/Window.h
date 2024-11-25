@@ -21,13 +21,13 @@ public:
     void update() const;
     bool closed() const;
 
-    inline float getWidth() const { return m_Width; }
-    inline float getHeight() const { return m_Height; }
+    inline float getWidth() const { return m_width; }
+    inline float getHeight() const { return m_height; }
     inline GLFWwindow* getGLFWwindow() const { return m_Window; }
 
 private:
     GLFWwindow* m_Window;
-    float m_Width, m_Height;
+    float m_width, m_height;
     const char* m_Title;
     bool m_Closed;
 

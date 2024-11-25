@@ -24,8 +24,8 @@ public:
     const Vec3& GetFront() const { return m_Front; }
     const Vec3& GetUp() const { return m_Up; }
     const Vec3& GetRight() const { return m_Right; }
-    const float& GetNear() const { return m_NearPlane; }
-    const float& GetFar() const { return m_FarPlane; }
+    const float GetNear() const { return m_NearPlane; }
+    const float GetFar() const { return m_FarPlane; }
 
     Frustum GetFrustum() const { return m_Frustum; }
     Transform* GetTransform() const { return m_Transform; }

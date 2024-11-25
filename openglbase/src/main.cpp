@@ -31,50 +31,49 @@
 #include "systems/ResourceManager.h"
 
 // settings
-const unsigned int SCR_WIDTH = 1080;
-const unsigned int SCR_HEIGHT = 1080;
+const unsigned int SCR_WIDTH = 1000;//2560
+const unsigned int SCR_HEIGHT = 1000; //1440
+#define MAX_POINTLIGHT 1
+#define MAX_SPOTLIGHT 1
 
-static void UpdateLights(const Scene& scene, Camera& camera)
+
+static void UpdateLights(const Scene& scene, const std::shared_ptr<Shader>& mainShader)
 {
-    // Iterate through lights in the scene
+    // Point lights
     const auto& pointLights = scene.GetLights("PointLight");
-
-    for (const auto& light : pointLights)
+    for (size_t i = 0; i < pointLights.size() && i < MAX_POINTLIGHT; ++i)
     {
-        auto pointLight = std::static_pointer_cast<PointLight>(light);
-        std::shared_ptr<Shader> shader = pointLight->GetShader();
-        shader->setUniform1i("material.diffuse", 0);
-        shader->setUniform1i("material.specular", 1);
-        shader->setUniform1f("material.shininess", 78.0f);
-        shader->setUniform3f("pointLights.position", pointLight->GetPosition());
-        shader->setUniform3f("pointLights.ambient", pointLight->GetColor() * 0.1f);
-        shader->setUniform3f("pointLights.diffuse", pointLight->GetColor() * 0.5f);
-        shader->setUniform3f("pointLights.specular", pointLight->GetColor() * 0.3f);
-        shader->setUniform1f("pointLights.constant", pointLight->GetConstant());
-        shader->setUniform1f("pointLights.linear", pointLight->GetLinear());
-        shader->setUniform1f("pointLights.quadratic", pointLight->GetQuadratic());
+        auto pointLight = std::static_pointer_cast<PointLight>(pointLights[i]);
+        std::string baseUniform = "pointLights[" + std::to_string(i) + "].";
+        mainShader->setUniform1i("material.diffuse", 0); // SlotID 0 for diffuse Texture2D
+        mainShader->setUniform1f("material.shininess", 128.0f);
+        mainShader->setUniform3f((baseUniform + "position").c_str(), pointLight->GetPosition());
+        mainShader->setUniform1f((baseUniform + "constant").c_str(), pointLight->GetConstant());
+        mainShader->setUniform1f((baseUniform + "linear").c_str(), pointLight->GetLinear());
+        mainShader->setUniform1f((baseUniform + "quadratic").c_str(), pointLight->GetQuadratic());
+        mainShader->setUniform3f((baseUniform + "ambient").c_str(), pointLight->GetVec3Color() * 0.1f);
+        mainShader->setUniform3f((baseUniform + "diffuse").c_str(), pointLight->GetVec3Color() * 0.8f);
+        mainShader->setUniform3f((baseUniform + "specular").c_str(), pointLight->GetVec3Color() * 0.3f);
     }
 
-    // Iterate through lights in the scene
+    // Spot lights
     const auto& spotLights = scene.GetLights("SpotLight");
-
-    for (const auto& light : spotLights)
+    for (size_t i = 0; i < spotLights.size() && i < MAX_SPOTLIGHT; ++i)
     {
-        auto spotLight = std::static_pointer_cast<SpotLight>(light);
-        std::shared_ptr<Shader> shader = spotLight->GetShader();
-        shader->setUniform1i("material.diffuse", 0);
-        shader->setUniform1i("material.specular", 1.2);
-        shader->setUniform1f("material.shininess", 128.0f);
-        shader->setUniform3f("spotLight.position", spotLight->GetPosition());
-        shader->setUniform3f("spotLight.direction", spotLight->GetDirection());
-        shader->setUniform1f("spotLight.cutOff", spotLight->GetCutOff());
-        shader->setUniform1f("spotLight.outerCutOff", spotLight->GetOuterCutOff());
-        shader->setUniform1f("spotLight.constant", spotLight->GetConstant());
-        shader->setUniform1f("spotLight.linear", spotLight->GetLinear());
-        shader->setUniform1f("spotLight.quadratic", spotLight->GetQuadratic());
-        shader->setUniform3f("spotLight.ambient", spotLight->GetColor() * 0.2f);
-        shader->setUniform3f("spotLight.diffuse", spotLight->GetColor() * 0.2f);
-        shader->setUniform3f("spotLight.specular", spotLight->GetColor() * 0.4f);
+        auto spotLight = std::static_pointer_cast<SpotLight>(spotLights[i]);
+        std::string baseUniform = "spotLights[" + std::to_string(i) + "].";
+        mainShader->setUniform1i("material.diffuse", 0);// SlotID 0 for diffuse Texture2D
+        mainShader->setUniform1f("material.shininess", 220.0f);
+        mainShader->setUniform3f((baseUniform + "position").c_str(), spotLight->GetPosition());
+        mainShader->setUniform3f((baseUniform + "direction").c_str(), spotLight->GetDirection());
+        mainShader->setUniform1f((baseUniform + "cutOff").c_str(), spotLight->GetCutOff());
+        mainShader->setUniform1f((baseUniform + "outerCutOff").c_str(), spotLight->GetOuterCutOff());
+        mainShader->setUniform1f((baseUniform + "constant").c_str(), spotLight->GetConstant());
+        mainShader->setUniform1f((baseUniform + "linear").c_str(), spotLight->GetLinear());
+        mainShader->setUniform1f((baseUniform + "quadratic").c_str(), spotLight->GetQuadratic());
+        mainShader->setUniform3f((baseUniform + "ambient").c_str(), spotLight->GetVec3Color() * 0.2f);
+        mainShader->setUniform3f((baseUniform + "diffuse").c_str(), spotLight->GetVec3Color() * 1.2f);
+        mainShader->setUniform3f((baseUniform + "specular").c_str(), spotLight->GetVec3Color() * 0.8f);
     }
 }
 
@@ -113,14 +112,14 @@ std::vector<DebugVertex> GenerateDebugCube(const Vec3& origin, const Color& colo
 
 int main()
 {
-    Window wnd("Graphics GL", SCR_WIDTH, SCR_WIDTH);
-    wnd.backgroundColor = Vec4(0.4, 0.4f, 0.4f, 1.0f);
+    Window wnd("DEBUG ENGINE", SCR_WIDTH, SCR_WIDTH);
+    wnd.backgroundColor = Vec4(0.1, 0.1f, 0.1f, 1.0f);
     //std::cout << "Current Working Directory: " << std::filesystem::current_path() << "\n" << std::endl;
 
     Vec3 LightPositions[] =
     {
-        Vec3(0.f, 0.3f, 0.f),
-        Vec3(0.f, 2.0f, 0.5f)
+        Vec3(0.f, 2.0f, 0.f),
+        Vec3(1.0f, 0.4f, 0.2f)
     };
 
     Scene scene;
@@ -142,40 +141,26 @@ int main()
 
     // SHADERS ===================
     std::cout << "[ LOADING SHADERS ]" << std::endl;
-    //auto basic = resourceManager->LoadResource<Shader>("res/shaders/standard");
-    auto spotLightShader = resourceManager->LoadResource<Shader>("res/shaders/spotlight");
-    auto pointLightShader = resourceManager->LoadResource<Shader>("res/shaders/pointlight");
-    auto lightSourceShader = resourceManager->LoadResource<Shader>("res/shaders/lightsource");
+    auto lightShader = resourceManager->LoadResource<Shader>("res/shaders/gl_worldlights");
+    auto lightSourceShader = resourceManager->LoadResource<Shader>("res/shaders/gl_lightsource");
     //==========================
 
     // MODELS ===================
-    //auto Room312 = resourceManager->LoadResource<Model>("res/tests/room312/rr91.obj");
-    //Room312->SetPosition(Vec3(0.0f, 0.0f, -10.f));
-
-    //auto stairs = resourceManager->LoadResource<Model>("res/tests/stairs/stairs.obj");
-    //stairs->SetBufferUsage(BufferUsage::Static);
-    //stairs->SetPosition(Vec3(0.f, 0.0f, 0.f));
 
     // TODO : Handle Multiple Instances
     auto cube1m = resourceManager->LoadResource<Model>("res/tests/cube1m/cube1m.obj");
     cube1m->SetBufferUsage(BufferUsage::Static);
     cube1m->SetPosition(Vec3(0.f, 0.0f, 0.f));
-    auto cube1m2 = resourceManager->LoadResource<Model>("res/tests/cube1m/cube1m.obj");
-    cube1m2->SetBufferUsage(BufferUsage::Static);
-    cube1m2->SetPosition(Vec3(0.f, 0.0f, 0.1f));
 
     auto floor = resourceManager->LoadResource<Model>("res/tests/plane/plane.obj");
     floor->SetBufferUsage(BufferUsage::Static);
     floor->SetPosition(Vec3(0.0f, 0.0f, 0.0f));
 
-    auto lightSphere = resourceManager->LoadResource<Model>("res/tests/sSphere/sSphere.obj");
-    lightSphere->SetBufferUsage(BufferUsage::Static);
-    lightSphere->SetPosition(Vec3(0.0f, 0.4f, 0.0f));
+    auto lightSource = resourceManager->LoadResource<Model>("res/tests/sSphere/sSphere.obj");
+    lightSource->SetBufferUsage(BufferUsage::Static);
+    lightSource->SetPosition(Vec3(0.0f, 0.4f, 0.0f));
 
     //==========================
-
-    // Checks loaded resources
-    resourceManager->PrintResources();
 
     // CAMERA SETUP ============
     Camera camera(Vec3(0.0f, 0.25f, 0.f));
@@ -196,38 +181,30 @@ int main()
 
     //==========================
 
+     // Checks loaded resources
+    resourceManager->PrintResources();
+
     // Enable cursor capture
     glfwSetInputMode(wnd.getGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    // Light properties
-    const Vec3 lightColor = Vec3(0.9686f, 0.9216f, 0.7922f); // Color of the light
-    const Vec3 lightColor2 = Vec3(0.9686f, 0.9216f, 0.7922f); // Color of the light
-    const Vec3 lightDirection = Vec3(0.0f, -1.0f, 0.f); // Direction of the spotlight (negative Z-axis)
-
-    // SpotLight parameters
-    float cutOff = cos(MATH_DEG_TO_RAD(15.5f));  // Spotlight's inner cone cutoff (12.5 degrees)
-    float outerCutOff = cos(MATH_DEG_TO_RAD(40.5f));  // Spotlight's outer cone cutoff (17.5 degrees)
-
     // Create light objects
-    auto light1 = std::make_shared<PointLight>(LightPositions[0], lightColor, 1.0f, 0.09f, 0.032f, pointLightShader);  // Point light
-    auto light2 = std::make_shared<SpotLight>(LightPositions[1], lightDirection, lightColor2, cutOff, outerCutOff, spotLightShader);  // Spotlight
-
-    light2->SetPosition(LightPositions[1]);
+    auto light1 = std::make_shared<PointLight>(LightPositions[0], Color::Green);  // Point light
+    auto light2 = std::make_shared<SpotLight>(LightPositions[1],  Color::White);  // Spotlight
 
     scene.AddLight("PointLight", light1);
     scene.AddLight("SpotLight", light2);
-    UpdateLights(scene, camera);
 
     // DEBUG CUBE OF LINES ============
     const Vec3 cubeOrigin(0.0f, 0.0f, 0.0f); // Cube starting position
-    const Color cubeColor = Color::Orange;  // Replace with your `Color::Orange` definition
 
-    std::vector<DebugVertex> cubeLines = GenerateDebugCube(cubeOrigin, cubeColor);
+    std::vector<DebugVertex> cubeLines = GenerateDebugCube(cubeOrigin, Color::Orange);
+    std::vector<DebugVertex> cubeLines2 = GenerateDebugCube(Vec3(2.0f, 0.0f, 1.0f), Color::Blue);
 
     // Add lines to your debug renderer
     for (size_t i = 0; i < cubeLines.size(); i += 2)
     {
         DebugRenderer::AddLine(new Line(cubeLines[i], cubeLines[i + 1]));
+        DebugRenderer::AddLine(new Line(cubeLines2[i], cubeLines2[i + 1]));
     }
     //==========================
 
@@ -248,46 +225,21 @@ int main()
         systemManager.UpdateSystems(timeManager->GetDeltaTime());
 
         wnd.clear();
-        
-        // Set the uniform in the shader
-        //UpdateLights(scene, camera);
-
-
-        // RENDER DEBUG STUFF ==================================================
         DebugRenderer::Render();
-
-        
-
-        lightSourceShader->setUniformMat4f("model", lightSphere->GetTransformMatrix());
-        lightSourceShader->setUniform3f("sourceColor", lightColor);
-
-        // Render the light source
-        lightSphere->Render(lightSourceShader, camera.GetViewUniform());
-
-        // Render point lights
-        //for (const auto& light : scene.GetLights("PointLight"))
-        UpdateLights(scene, camera);
-
-        /*
-        light1->GetShader()->setUniformMat4f("model", floor->GetTransformMatrix());
-        floor->Render(light1->GetShader(), viewUniformsData);
-        light1->GetShader()->setUniformMat4f("model", cube1m->GetTransformMatrix());
-        cube1m->Render(light1->GetShader(), viewUniformsData);
-        light1->GetShader()->setUniformMat4f("model", cube1m2->GetTransformMatrix());
-        cube1m2->Render(light1->GetShader(), viewUniformsData);
-        */
 
         light2->SetSpotlightDirection(camera.GetFront());
         light2->SetPosition(camera.GetTransform()->GetPosition());
 
-        light2->GetShader()->setUniformMat4f("model", floor->GetTransformMatrix());
-        floor->Render(light2->GetShader(), camera.GetViewUniform());
-        light2->GetShader()->setUniformMat4f("model", cube1m->GetTransformMatrix());
-        cube1m->Render(light2->GetShader(), camera.GetViewUniform());
-        light2->GetShader()->setUniformMat4f("model", cube1m2->GetTransformMatrix());
-        cube1m2->Render(light2->GetShader(), camera.GetViewUniform());
+        // Render the pointlight source
+        lightSourceShader->setUniform3f("sourceColor", Vec3(0.0f, 1.0f, 0.0f));
+        lightSource->Render(lightSourceShader, camera.GetViewUniform());
 
-        //nightSky.Render(camera.GetViewMatrix(), camera.GetProjectionMatrix());
+        // Update Lights shader uniforms
+        UpdateLights(scene, lightShader);
+
+        floor->Render(lightShader, camera.GetViewUniform());
+        cube1m->Render(lightShader, camera.GetViewUniform());
+        //room->Render(lightShader, camera.GetViewUniform());
 
         wnd.update();
     }

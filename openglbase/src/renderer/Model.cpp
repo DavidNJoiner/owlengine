@@ -17,6 +17,7 @@ Model::Model(const std::shared_ptr<Mesh>& meshResource)
 
 void Model::Render(const std::shared_ptr<Shader>& shader, const ViewUniforms& viewUniform)
 {
+    shader->setUniformMat4f("model", GetTransformMatrix());
     for (GLuint i = 0; i < m_Meshes.size(); i++)
     {
         m_Meshes[i]->Render(shader, viewUniform);
@@ -129,36 +130,33 @@ void Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
     }
     
     // Load different types of textures
-    m_Textures.push_back(LoadMaterialTextures(scene->mMaterials[mesh->mMaterialIndex], aiTextureType_DIFFUSE, "diffuse"));
-    //m_Textures.push_back(LoadMaterialTextures(scene->mMaterials[mesh->mMaterialIndex], aiTextureType_SPECULAR, "texture_specular"));
-    //LoadMaterialTextures(scene->mMaterials[mesh->mMaterialIndex], aiTextureType_NORMALS, "texture_normal");
+    m_Textures.push_back(LoadMaterialTextures(scene->mMaterials[mesh->mMaterialIndex], aiTextureType_DIFFUSE));
+    //m_Textures.push_back(LoadMaterialTextures(scene->mMaterials[mesh->mMaterialIndex], aiTextureType_SPECULAR));
+    //m_Textures.push_back(LoadMaterialTextures(scene->mMaterials[mesh->mMaterialIndex], aiTextureType_NORMALS));
 
     auto newMeshPtr = std::make_shared<Mesh>(meshName, vertices, indices, m_Textures, m_Usage);
     m_Meshes.push_back(newMeshPtr);
 }
 
-std::shared_ptr<Texture2D> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+std::shared_ptr<Texture2D> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type)
 {
     ResourceManager& resourceManager = ResourceManager::GetInstance();
+
     for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
     {
         aiString str;
         mat->GetTexture(type, i, &str);
 
-        std::string texturePath = "res/textures/" + std::string(str.C_Str());
-
-        auto texture = resourceManager.LoadResource<Texture2D>(texturePath);
-        if (texture) {
-            texture->SetTextureType(typeName);
+        std::string path = "res/textures/" + std::string(str.C_Str());
+        
+        auto texture = resourceManager.LoadResource<Texture2D>(path);
+        if (texture) 
+        { 
             return texture;
         }
     }
-
     // If no texture is found, load a fallback texture
     std::string defaultTexturePath = "res/textures/debug/checker.png";
     auto defaultTexture = resourceManager.LoadResource<Texture2D>(defaultTexturePath);
-    if (defaultTexture) {
-        defaultTexture->SetTextureType(typeName);
-    }
-    return defaultTexture;
+    return defaultTexture; 
 }

@@ -106,9 +106,9 @@ void Mesh::Bind(const std::shared_ptr<Shader>& shader)
     shader->Use();
     // Bind the textures
     for (size_t i = 0; i < m_MeshTextures.size(); i++) {
-        m_MeshTextures[i]->Bind(); // Ensure the texture is bound
-        // Set the texture uniform in the shader
-        shader->setUniform1i(m_MeshTextures[i]->GetTextureType().c_str(), i);
+        m_MeshTextures[i]->Bind(); // Bind a texture
+        const char* uniformName = "diffuse"; // or m_MeshTextures[i]->GetUniformName().c_str()
+        shader->setUniform1i(uniformName, i);
     }
 }
 

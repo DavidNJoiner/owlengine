@@ -11,8 +11,8 @@
 VertexBufferLayout DebugRenderer::m_debugVertexlayout;
 
 // Shaders
-std::shared_ptr<Shader> DebugRenderer::m_lineShader;
-std::shared_ptr<Shader> DebugRenderer::m_gridShader;
+std::shared_ptr<Shader> DebugRenderer::m_shader_debugline;
+std::shared_ptr<Shader> DebugRenderer::m_shader_worldgrid;
 
 std::vector<Line*> DebugRenderer::s_lines;
 std::vector<DebugVertex> DebugRenderer::vertexData;
@@ -26,12 +26,19 @@ void DebugRenderer::Initialize()
     ResourceManager& resourceManager = ResourceManager::GetInstance();
 
     // Load Debug Shaders
-    m_lineShader = resourceManager.LoadResource<Shader>("res/shaders/debugLine");
-    m_gridShader = resourceManager.LoadResource<Shader>("res/shaders/floorgrid");
+    m_shader_debugline = resourceManager.LoadResource<Shader>("res/shaders/gl_debugline");
+    m_shader_worldgrid = resourceManager.LoadResource<Shader>("res/shaders/gl_worldgrid");
 
     // Define the layout for DebugVertex
     m_debugVertexlayout.Push<float>(3); // position
     m_debugVertexlayout.Push<float>(4); // color
+
+    // Initialize VertexArray and VertexBuffer for debug lines
+    va = std::make_unique<VertexArray>();
+    vb = std::make_unique<VertexBuffer>(nullptr, 0, GL_DYNAMIC_DRAW);
+    va->Bind();
+    va->AddBuffer(*vb.get(), m_debugVertexlayout);
+    va->Unbind();
 }
 
 void DebugRenderer::SetCamera(Camera* camera)
@@ -65,13 +72,10 @@ void DebugRenderer::Render()
     glGenVertexArrays(1, &quadVAO);
     glBindVertexArray(quadVAO);
 
-    // Plane rendering setup
-    Matrix model(1.0f);
-
     // Set uniforms for the grid shader
-    m_gridShader->setUniform1f("near", m_camera->GetNear());
-    m_gridShader->setUniform1f("far", m_camera->GetFar());
-    m_gridShader->setViewUniforms(m_camera->GetViewUniform());
+    m_shader_worldgrid->setUniform1f("near", m_camera->GetNear());
+    m_shader_worldgrid->setUniform1f("far", m_camera->GetFar());
+    m_shader_worldgrid->setViewUniforms(m_camera->GetViewUniform());
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
@@ -84,10 +88,8 @@ void DebugRenderer::Render()
     {
         if (line != nullptr)
         {
-            DebugVertex v1 = line->GetStart();
-            DebugVertex v2 = line->GetEnd();
-            vertexData.push_back(v1);
-            vertexData.push_back(v2);
+            vertexData.push_back(line->GetStart());
+            vertexData.push_back(line->GetEnd());
         }
     }
 
@@ -96,8 +98,8 @@ void DebugRenderer::Render()
 
     va->Bind();
     va->AddBuffer(*vb.get(), m_debugVertexlayout);
-    m_lineShader->Use();
-    m_lineShader->setViewUniforms(m_camera->GetViewUniform());
+    m_shader_debugline->Use();
+    m_shader_debugline->setViewUniforms(m_camera->GetViewUniform());
     glDrawArrays(GL_LINES, 0, vertexData.size());
     va->Unbind();
 }

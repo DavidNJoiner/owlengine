@@ -20,7 +20,7 @@ vec4 grid(vec3 fragPos3D, float scale) {
     float line = min(grid.x, grid.y);
     vec4 color = vec4(0.1, 0.1, 0.1, 1 - min(line, 0.9));
 
-    float axisWidth = 0.05; // Adjust this value to change the thickness of the axes
+    float axisWidth = 0.08; // Adjust this value to change the thickness of the axes
     
     if (abs(fragPos3D.x) < axisWidth * derivative.x)
         color = vec4(0.0, 0.0, 1.0, 1.0); // Primary blue for Z-axis
@@ -37,7 +37,7 @@ float computeDepth(vec3 pos) {
 
 float computeLinearDepth(vec3 pos) {
     float clip_space_depth = computeDepth(pos) * 2.0 - 1.0; // Normalize between -1 and 1
-    float linearDepth = (18.0 * near * far) / (far + near - clip_space_depth * (far - near));
+    float linearDepth = (10.0 * near * far) / (far + near - clip_space_depth * (far - near));
     return linearDepth / far; // Normalize
 }
 

@@ -4,30 +4,48 @@
 #include <iostream>
 #include <string>
 #include <vector>
-// GLAD
 #include <glad/glad.h>
 #include "stb_image.h"
 #include "core/ITexture.h"
 #include "renderer/types/Texture2D.h"
+#include "renderer/types/Resource.h"
 
-class CubeMap : public Resource
+class CubeMap : public ITexture, public Resource
 {
 public:
-    CubeMap(const std::vector<std::shared_ptr<Texture2D>> cubemapTextures);
+    // Constructors
     CubeMap() = default;
-    ~CubeMap();
+    CubeMap(const std::vector<std::shared_ptr<Texture2D>>& cubemapTextures);
+    CubeMap(const std::vector<std::string>& cubemapPaths);
 
-    void Bind();
-    void Unbind();
+    // Destructor
+    ~CubeMap() override;
 
-    inline GLuint GetCubeMapTextureID() const { return m_ID; }
+    // Move constructor
+    CubeMap(CubeMap&& other) noexcept;
+
+    // Move assignment operator
+    CubeMap& operator=(CubeMap&& other) noexcept;
+
+    // Copy constructor
+    CubeMap(const CubeMap& other);
+
+    // Copy assignment operator
+    CubeMap& operator=(const CubeMap& other);
+
+    // Override ITexture virtual methods
+    bool Load(const std::string& path = "") override;
+    void Bind(GLuint textureUnit = 0) const override;
+    void Unbind() const override;
+
+    // Additional methods
+    inline GLuint GetCubeMapTextureID() const { return m_textureID; }
+
+protected:
+    // Override the pure virtual method from ITexture
+    GLenum GetGLTextureTarget() const override { return GL_TEXTURE_CUBE_MAP; }
 
 private:
-    bool Load() override;
-    void Unload() override;
-
-private:
-    GLuint m_ID = 0;
     std::vector<std::shared_ptr<Texture2D>> m_CubeMapTextures;
 };
 

@@ -19,3 +19,9 @@ void VertexBuffer::Unbind() const
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void VertexBuffer::UpdateData(const void* data, size_t size)
+{
+    Bind(); 
+    glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+}
+
