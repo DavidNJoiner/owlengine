@@ -24,8 +24,24 @@ public:
         return (it != m_LightGroups.end()) ? it->second : empty;
     }
 
-    const std::vector < std::shared_ptr<IEntity>>& GetEntities() const {
+    const std::vector<std::shared_ptr<ILightEntity>> GetAllLights() const {
+        std::vector<std::shared_ptr<ILightEntity>> allLights;
+
+        for (const auto& [type, lights] : m_LightGroups) {
+            allLights.insert(allLights.end(), lights.begin(), lights.end());
+        }
+
+        return allLights;
+    }
+
+    const std::vector<std::shared_ptr<IEntity>>& GetEntities() const {
         return m_Entities;
+    }
+
+    // Function to return the quantity of a given light type
+    size_t GetLightCount(const std::string& type) const {
+        auto it = m_LightGroups.find(type);
+        return (it != m_LightGroups.end()) ? it->second.size() : 0;
     }
 
 private:
