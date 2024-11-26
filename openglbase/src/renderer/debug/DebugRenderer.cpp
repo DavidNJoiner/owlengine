@@ -67,10 +67,7 @@ void DebugRenderer::Render()
 {
     // RENDER DEBUG GRID ==================================================
     glDepthMask(GL_FALSE);
-
-    GLuint quadVAO;
-    glGenVertexArrays(1, &quadVAO);
-    glBindVertexArray(quadVAO);
+    va->Bind();
 
     // Set uniforms for the grid shader
     m_shader_worldgrid->setUniform1f("near", m_camera->GetNear());
@@ -78,8 +75,8 @@ void DebugRenderer::Render()
     m_shader_worldgrid->setViewUniforms(m_camera->GetViewUniform());
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
-    glBindVertexArray(0);
 
+    va->Unbind();
     glDepthMask(GL_TRUE);
 
     // RENDER DEBUG LINES ==================================================

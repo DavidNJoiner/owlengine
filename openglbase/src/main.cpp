@@ -238,7 +238,7 @@ int main()
         light2->SetPosition(camera.GetTransform()->GetPosition());
 
         // Render the pointlight source
-        lightSourceShader->setUniform3f("sourceColor", Vec3(1.0f, 0.0f, 0.0f));
+        lightSourceShader->setUniform3f("sourceColor", red);
         lightSource->Render(lightSourceShader, camera.GetViewUniform());
 
         // Update Lights shader uniforms

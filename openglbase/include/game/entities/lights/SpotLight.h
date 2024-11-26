@@ -12,13 +12,10 @@ public:
         // Update logic for spotlight if needed
     }
 
-    void SetSpotlightDirection(const Vec3& targetDirection) {
-        // Normalize the target direction
-        Vec3 normalizedTarget = targetDirection;
-        normalizedTarget.normalize();
-
-        // Update the spotlight's internal direction
-        m_Direction = normalizedTarget;
+    void SetSpotlightDirection(const Vec3& targetDirection)
+    {
+        m_Direction = targetDirection;  
+        m_Direction.normalize(); 
     }
 
     inline const Vec3& GetDirection() const { return m_Direction; }

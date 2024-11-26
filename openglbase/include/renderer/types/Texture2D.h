@@ -36,6 +36,15 @@ public:
     // Additional methods
     inline int GetSlotID() const { return m_slotID; }
     inline void SetSlotID(int newSlotID) { m_slotID = newSlotID; }
+    inline const char* GetUniformName() const {
+        switch (m_slotID) {
+        case 0: return "diffuse";
+        case 1: return "specular";
+        case 2: return "normal";
+        case 3: return "height";
+        default: return "unknown"; 
+        }
+    }
 
 protected:
     // Override the pure virtual method from ITexture
