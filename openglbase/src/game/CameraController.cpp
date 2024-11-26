@@ -8,8 +8,8 @@ CameraController::CameraController(Camera* camera, const Vec3& target, const Vec
     : m_Camera(camera),
     m_Target(target),
     m_Offset(offset),
-    m_MovementSpeed(10.0f),       
-    m_MouseSensitivity(0.7f),   
+    m_MovementSpeed(20.0f),       
+    m_MouseSensitivity(0.9f),   
     m_FirstMouse(true),
     m_LastX(0.0f),
     m_LastY(0.0f)
