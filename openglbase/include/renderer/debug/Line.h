@@ -6,7 +6,7 @@
 
 struct DebugVertex {
     Vec3 position;
-    Color color;
+    Color color = Color::Orange;
 };
 
 class Color;
@@ -14,7 +14,7 @@ class Line
 {
 public:
     // Constructor with start, end, color, and thickness
-    Line(const DebugVertex& start, const DebugVertex& end, const Color& color, float thickness = 1.0f);
+    Line(const DebugVertex& start, const DebugVertex& end, const Color& color = Color::Orange, float thickness = 1.0f);
     ~Line();
 
     // Update the line's start and end points

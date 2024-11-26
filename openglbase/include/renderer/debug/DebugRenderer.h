@@ -15,7 +15,6 @@ public:
     static void AddLine(Line* line);
     static void RemoveLine(Line* line);
     static void Render();
-    static void ShutDown();
 
 private:
     static VertexBufferLayout m_debugVertexlayout;

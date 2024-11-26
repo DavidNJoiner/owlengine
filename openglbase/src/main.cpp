@@ -31,10 +31,10 @@
 #include "systems/ResourceManager.h"
 
 // settings
-const unsigned int SCR_WIDTH = 1600;//2560
-const unsigned int SCR_HEIGHT = 1440; //1440
-#define MAX_POINTLIGHT 2
-#define MAX_SPOTLIGHT 2
+const unsigned int SCR_WIDTH = 1000;//2560
+const unsigned int SCR_HEIGHT = 1000; //1440
+#define MAX_POINTLIGHT 1
+#define MAX_SPOTLIGHT 1
 
 
 static void UpdateLights(const Scene& scene, const std::shared_ptr<Shader>& mainShader)
@@ -52,7 +52,7 @@ static void UpdateLights(const Scene& scene, const std::shared_ptr<Shader>& main
         mainShader->setUniform1f((baseUniform + "linear").c_str(), pointLight->GetLinear());
         mainShader->setUniform1f((baseUniform + "quadratic").c_str(), pointLight->GetQuadratic());
         mainShader->setUniform3f((baseUniform + "ambient").c_str(), pointLight->GetVec3Color() * 0.1f);
-        mainShader->setUniform3f((baseUniform + "diffuse").c_str(), pointLight->GetVec3Color() * 0.3f);
+        mainShader->setUniform3f((baseUniform + "diffuse").c_str(), pointLight->GetVec3Color() * 0.8f);
         mainShader->setUniform3f((baseUniform + "specular").c_str(), pointLight->GetVec3Color() * 0.3f);
     }
 
@@ -72,7 +72,7 @@ static void UpdateLights(const Scene& scene, const std::shared_ptr<Shader>& main
         mainShader->setUniform1f((baseUniform + "linear").c_str(), spotLight->GetLinear());
         mainShader->setUniform1f((baseUniform + "quadratic").c_str(), spotLight->GetQuadratic());
         mainShader->setUniform3f((baseUniform + "ambient").c_str(), spotLight->GetVec3Color() * 0.2f);
-        mainShader->setUniform3f((baseUniform + "diffuse").c_str(), spotLight->GetVec3Color() * 0.8f);
+        mainShader->setUniform3f((baseUniform + "diffuse").c_str(), spotLight->GetVec3Color() * 1.2f);
         mainShader->setUniform3f((baseUniform + "specular").c_str(), spotLight->GetVec3Color() * 0.8f);
     }
 }
@@ -84,13 +84,13 @@ std::vector<DebugVertex> GenerateDebugCube(const Vec3& origin, const Color& colo
     // Cube vertices relative to origin
     Vec3 vertices[8] = {
         origin + Vec3(0.0f, 0.0f, 0.0f), // 0
-        origin + Vec3(0.5f, 0.0f, 0.0f), // 1
-        origin + Vec3(0.5f, 0.5f, 0.0f), // 2
-        origin + Vec3(0.0f, 0.5f, 0.0f), // 3
-        origin + Vec3(0.0f, 0.0f, 0.5f), // 4
-        origin + Vec3(0.5f, 0.0f, 0.5f), // 5
-        origin + Vec3(0.5f, 0.5f, 0.5f), // 6
-        origin + Vec3(0.0f, 0.5f, 0.5f)  // 7
+        origin + Vec3(1.0f, 0.0f, 0.0f), // 1
+        origin + Vec3(1.0f, 1.0f, 0.0f), // 2
+        origin + Vec3(0.0f, 1.0f, 0.0f), // 3
+        origin + Vec3(0.0f, 0.0f, 1.0f), // 4
+        origin + Vec3(1.0f, 0.0f, 1.0f), // 5
+        origin + Vec3(1.0f, 1.0f, 1.0f), // 6
+        origin + Vec3(0.0f, 1.0f, 1.0f)  // 7
     };
 
     // Define edges of the cube (pairs of vertex indices)
@@ -163,7 +163,7 @@ int main()
     //==========================
 
     // CAMERA SETUP ============
-    Camera camera(Vec3(0.0f, 1.0f, 0.f));
+    Camera camera(Vec3(0.0f, 0.25f, 0.f));
 
     float fov = 50.0f;  // Field of view in degrees
     float aspectRatio = static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT);
@@ -185,17 +185,11 @@ int main()
     resourceManager->PrintResources();
 
     // Enable cursor capture
-    //glfwSetInputMode(wnd.getGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-    Color r = Color::Red;
-    Color w = Color::White;
-
-    Vec3 red = r.ToVec3();
-    Vec3 white = w.ToVec3();
+    glfwSetInputMode(wnd.getGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // Create light objects
-    auto light1 = std::make_shared<PointLight>(LightPositions[0], red);  // Point light
-    auto light2 = std::make_shared<SpotLight>(LightPositions[1], white);  // Spotlight
+    auto light1 = std::make_shared<PointLight>(LightPositions[0], Color::Green);  // Point light
+    auto light2 = std::make_shared<SpotLight>(LightPositions[1],  Color::White);  // Spotlight
 
     scene.AddLight("PointLight", light1);
     scene.AddLight("SpotLight", light2);
@@ -206,13 +200,12 @@ int main()
     std::vector<DebugVertex> cubeLines = GenerateDebugCube(cubeOrigin, Color::Orange);
     std::vector<DebugVertex> cubeLines2 = GenerateDebugCube(Vec3(2.0f, 0.0f, 1.0f), Color::Blue);
 
+    // Add lines to your debug renderer
     for (size_t i = 0; i < cubeLines.size(); i += 2)
     {
-        DebugRenderer::AddLine(new Line(cubeLines[i], cubeLines[i + 1], Color::Orange));
-        DebugRenderer::AddLine(new Line(cubeLines2[i], cubeLines2[i + 1], Color::Blue));
+        DebugRenderer::AddLine(new Line(cubeLines[i], cubeLines[i + 1]));
+        DebugRenderer::AddLine(new Line(cubeLines2[i], cubeLines2[i + 1]));
     }
-
-
     //==========================
 
     glEnable(GL_DEPTH_TEST);
@@ -238,7 +231,7 @@ int main()
         light2->SetPosition(camera.GetTransform()->GetPosition());
 
         // Render the pointlight source
-        lightSourceShader->setUniform3f("sourceColor", Vec3(1.0f, 0.0f, 0.0f));
+        lightSourceShader->setUniform3f("sourceColor", Vec3(0.0f, 1.0f, 0.0f));
         lightSource->Render(lightSourceShader, camera.GetViewUniform());
 
         // Update Lights shader uniforms
@@ -251,7 +244,6 @@ int main()
         wnd.update();
     }
 
-    DebugRenderer::ShutDown();
     wnd.closed();
     return 0;
 }

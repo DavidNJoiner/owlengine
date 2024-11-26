@@ -10,7 +10,7 @@
 
 class ILightEntity : public IEntity {
 public:
-    ILightEntity(const Vec3& position, const Vec3& color)
+    ILightEntity(const Vec3& position, const Color& color)
         :m_Color(color)
     {
         AddComponent<Transform>(position);
@@ -21,10 +21,11 @@ public:
 
     inline const Vec3& GetPosition() const { return GetComponent<Transform>()->GetPosition(); }
     inline void SetPosition(Vec3& position) { GetComponent<Transform>()->SetPosition(position); }
-    inline const Vec3& GetVec3Color() const { return m_Color; } 
+    inline const Vec3& GetVec3Color() const { return m_color; } //DEBUG
 
 protected:
-    Vec3 m_Color;
+    Color m_Color;
+    Vec3 m_color = (1.0f, 1.0f, 1.0f);
 };
 
 #endif // ILIGHTENTITY_H
