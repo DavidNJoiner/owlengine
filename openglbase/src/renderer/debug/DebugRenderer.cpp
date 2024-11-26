@@ -103,3 +103,10 @@ void DebugRenderer::Render()
     glDrawArrays(GL_LINES, 0, vertexData.size());
     va->Unbind();
 }
+
+void DebugRenderer::ShutDown()
+{
+
+    s_lines.clear();
+    vertexData.clear();
+}

@@ -5,7 +5,7 @@
 
 class PointLight : public ILightEntity {
 public:
-    PointLight(const Vec3& position, const Color& color, float constant = 0.9f, float linear = 0.09f, float quadratic = 0.032f)
+    PointLight(const Vec3& position, const Vec3& color, float constant = 0.9f, float linear = 0.09f, float quadratic = 0.032f)
         : ILightEntity(position, color), m_Constant(constant), m_Linear(linear), m_Quadratic(quadratic)
     {}
 
